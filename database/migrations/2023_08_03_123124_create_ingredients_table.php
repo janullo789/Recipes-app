@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 100);
             $table->enum('category', IngredientCategory::TYPES);
-            $table->enum('category', IngredientUnit::TYPES);
+            $table->enum('unit', IngredientUnit::TYPES);
             $table->integer('calories')->nullable();
             $table->timestamps();
         });

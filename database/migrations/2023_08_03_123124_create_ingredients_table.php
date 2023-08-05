@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
+            $table->string('name', 100)->unique();
             $table->enum('category', IngredientCategory::TYPES);
             $table->enum('unit', IngredientUnit::TYPES);
-            $table->integer('calories')->nullable();
+            $table->double('calories')->nullable();
             $table->timestamps();
         });
     }

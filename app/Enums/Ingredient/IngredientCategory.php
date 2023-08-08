@@ -25,4 +25,9 @@ class IngredientCategory
         self::VEGETABLES,
         self::OTHER
     ];
+
+    public static function values(): array
+    {
+        return array_column(self::TYPES);
+    }
 }

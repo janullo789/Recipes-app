@@ -6,6 +6,7 @@ use App\Models\Ingredient;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
@@ -13,10 +14,19 @@ class IngredientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View|Application|Factory
+    public function index(Request $request): View|Application|Factory|JsonResponse
     {
+        $filters = $request->query('filter');
+        $paginate = $request->query('paginate') ?? 150;
+        $query = Ingredient::query();
+        if (!is_null($filters)) {
+            $query = $query->whereIn('category', $filters['categories']);
+
+            return response()->json($query->paginate($paginate));
+        }
         return view('ingredients.index', [
-            'ingredients' => Ingredient::all()
+            'ingredients' => $query->paginate($paginate),
+            'categories' => Ingredient::distinct('category')->pluck('category')
         ]);
     }
 

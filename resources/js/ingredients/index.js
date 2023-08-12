@@ -1,12 +1,25 @@
 import $ from 'jquery';
 
-$(function () {
-    $('a#filter-button').click(function () {
+$(function() {
+    $('div.items-count a').click(function (event) {
+        event.preventDefault();
+        $('a.items-actual-count').text($(this).text());
+        $('#dropdown').removeClass('block').addClass('hidden');
+        getItems($(this).text());
+    });
+
+    $('a#filter-button').click(function(event) {
+        event.preventDefault();
+        getItems($('a.items-actual-count').text());
+    });
+
+    function getItems(paginate) {
         const form = $('form#sidebar-filter').serialize();
+        console.log(form)
         $.ajax({
             method: "GET",
             url: "ingredients/",
-            data: form,
+            data: form + "&" + $.param({paginate: paginate}),
             dataType: 'json'
         })
             .done(function (response) {
@@ -15,7 +28,7 @@ $(function () {
                     const html = '<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">' +
                         '                   <th scope="row"' +
                         '                       class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">' +
-                                                ingredient.name +
+                                                    ingredient.name +
                         '                   </th>' +
                         '                   <td class="px-6 py-4">' +
                                                 ingredient.category +
@@ -33,6 +46,6 @@ $(function () {
                         '                 </tr>';
                     $('tbody#ingredients-list').append(html);
                 });
-            })
-    });
+            });
+    }
 });

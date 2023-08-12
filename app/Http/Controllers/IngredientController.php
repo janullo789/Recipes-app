@@ -17,15 +17,20 @@ class IngredientController extends Controller
     public function index(Request $request): View|Application|Factory|JsonResponse
     {
         $filters = $request->query('filter');
-        $paginate = $request->query('paginate') ?? 150;
+        $paginate = $request->query('paginate') ?? 10;
         $query = Ingredient::query();
-        if (!is_null($filters)) {
+        if (!is_null($filters) && isset($filters['categories'])) {
             $query = $query->whereIn('category', $filters['categories']);
-
-            return response()->json($query->paginate($paginate));
         }
+
+        $ingredients = $query->paginate($paginate);
+
+        if ($request->ajax()) {
+            return response()->json($ingredients);
+        }
+
         return view('ingredients.index', [
-            'ingredients' => $query->paginate($paginate),
+            'ingredients' => $ingredients,
             'categories' => Ingredient::distinct('category')->pluck('category')
         ]);
     }
@@ -35,7 +40,7 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        //
+        return view('ingredients.create');
     }
 
     /**

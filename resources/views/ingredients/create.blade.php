@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-xl space-y-6 sm:px-6 lg:px-8">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <form method="POST" class="px-6">
+                <form method="POST" action="{{ route('ingredients.store') }}" class="px-6">
                     @csrf
 
                     <!-- Name -->
@@ -33,8 +33,8 @@
 
                     <!-- Unit -->
                     <div class="my-4">
-                        <x-input-label for="category" :value="__('Unit')"/>
-                        <select id="category" name="category" class="bg-gray-50 border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <x-input-label for="unit" :value="__('Unit')"/>
+                        <select id="unit" name="unit" class="bg-gray-50 border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                             <option value="" disabled selected>Select your option</option>
                             @foreach(\App\Enums\Ingredient\IngredientUnit::TYPES as $unit)
                                 <option value="{{ $unit }}">{{ $unit }}</option>
@@ -46,7 +46,7 @@
                     <!-- Calories -->
                     <div class="my-4">
                         <x-input-label for="calories" :value="__('Calories')"/>
-                        <x-numeric-input id="calories" class="block mt-1 w-full" type="number" min="0" name="calories" :value="old('calories')"
+                        <x-numeric-input id="calories" class="block mt-1 w-full" type="number" step=".01" min="0" name="calories" :value="old('calories')"
                                       required autofocus autocomplete="calories"/>
                         <x-input-error :messages="$errors->get('calories')" class="mt-2"/>
                     </div>

@@ -74,6 +74,8 @@
                                     <td class="px-6 py-4">
                                         <a href="#"
                                            class="font-medium text-blue-600 hover:underline dark:text-blue-500">Edit</a>
+                                        <button data-id="{{ $ingredient->id }}"
+                                           class="ml-2 font-medium text-red-600 hover:underline dark:text-blue-500">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach

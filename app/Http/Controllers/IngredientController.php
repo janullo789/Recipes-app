@@ -66,18 +66,27 @@ class IngredientController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param Ingredient $ingredient
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
     public function edit(Ingredient $ingredient)
     {
-        //
+        return view("ingredients.edit", [
+            'ingredient' => $ingredient
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * @param Request $request
+     * @param Ingredient $ingredient
+     * @return RedirectResponse
      */
-    public function update(Request $request, Ingredient $ingredient)
+    public function update(Request $request, Ingredient $ingredient): RedirectResponse
     {
-        //
+        $ingredient->fill($request->all());
+        $ingredient->save();
+        return redirect(route('ingredients.index'))->with('status', 'Ingredient updated!');
     }
 
     /**

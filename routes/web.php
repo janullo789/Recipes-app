@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
     Route::get('/ingredients/create', [IngredientController::class, 'create'])->name('ingredients.create');
     Route::post('/ingredients', [IngredientController::class, 'store'])->name('ingredients.store');
+    Route::get('/ingredients/edit/{ingredient}', [IngredientController::class, 'edit'])->name('ingredients.edit');
+    Route::post('/ingredients/{ingredient}', [IngredientController::class, 'update'])->name('ingredients.update');
     Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredients.destroy');
 });
 

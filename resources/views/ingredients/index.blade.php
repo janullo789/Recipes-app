@@ -11,6 +11,13 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="flex items-start">
                     <form class="border-gray-200 p-6 text-xl" id="sidebar-filter">
+                        <div class="flex content-center justify-center">
+                            <a href="{{ route('ingredients.create') }}"
+                               class="mb-10 rounded border border-gray-400 bg-green-400 px-4 py-2 uppercase text-gray-800 shadow hover:bg-green-500">
+                                {{ __('Add new ingredient') }}
+                            </a>
+                        </div>
+                        @csrf
                         <div class="border-b-2 border-gray-500 pb-1 text-center font-medium">
                             <label class="uppercase">{{ __('Category') }}</label>
                         </div>
@@ -72,41 +79,60 @@
                                         {{ $ingredient->calories }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="#"
-                                           class="font-medium text-blue-600 hover:underline dark:text-blue-500">Edit</a>
+                                        <a href="{{ route('ingredients.edit', $ingredient->id) }}"
+                                           class="font-medium text-blue-600 hover:underline dark:text-blue-500">{{ __('Edit') }}</a>
                                         <button data-id="{{ $ingredient->id }}"
-                                           class="ml-2 font-medium text-red-600 hover:underline dark:text-blue-500">Delete</button>
+                                                class="ml-2 font-medium text-red-600 delete hover:underline dark:text-blue-500">
+                                            {{ __('Delete') }}
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        <div class="flex justify-evenly py-4 space-x-2 rtl:space-x-reverse">
-                            <a class="w-20 items-actual-count text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                               data-dropdown-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">10</a>
-                            <!-- Dropdown menu -->
-                            <div id="dropdown"
-                                 class="items-count z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                                 aria-labelledby="navbarDropdown" x-placement="bottom-end"
-                                 style="will-change: transform; position: absolute; transform: translate3d(120px, 48px, 0px); top: 0px; left: 0px;">
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">10</a>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">20</a>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">50</a>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">100</a>
-                            </div>
-                        </div>
+{{--                        <div class="flex justify-evenly py-4 space-x-2 rtl:space-x-reverse">--}}
+{{--                            <a class="inline-flex w-20 items-center rounded-lg bg-blue-700 px-5 text-center text-sm font-medium text-white items-actual-count py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"--}}
+{{--                               data-dropdown-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">10</a>--}}
+{{--                            <!-- Dropdown menu -->--}}
+{{--                            <div id="dropdown"--}}
+{{--                                 class="z-10 hidden w-44 rounded-lg bg-white shadow items-count divide-y divide-gray-100 dark:bg-gray-700"--}}
+{{--                                 aria-labelledby="navbarDropdown" x-placement="bottom-end"--}}
+{{--                                 style="will-change: transform; position: absolute; transform: translate3d(120px, 48px, 0px); top: 0px; left: 0px;">--}}
+{{--                                <a href="#"--}}
+{{--                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">10</a>--}}
+{{--                                <a href="#"--}}
+{{--                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">20</a>--}}
+{{--                                <a href="#"--}}
+{{--                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">50</a>--}}
+{{--                                <a href="#"--}}
+{{--                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">100</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="pagination-links">--}}
+{{--                            {{ $ingredients->links() }}--}}
+{{--                        </div>--}}
                         <div class="pagination-links">
-                            {{ $ingredients->links() }}
+                            <div class="flex justify-evenly py-4 space-x-2 rtl:space-x-reverse">
+                                <a class="inline-flex w-20 items-center rounded-lg bg-blue-700 px-5 text-center text-sm font-medium text-white items-actual-count py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-dropdown-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">10</a>
+                                <!-- Dropdown menu -->
+                                <div id="dropdown" class="z-10 hidden w-44 rounded-lg bg-white shadow items-count divide-y divide-gray-100 dark:bg-gray-700" aria-labelledby="navbarDropdown" x-placement="bottom-end" style="will-change: transform; position: absolute; transform: translate3d(120px, 48px, 0px); top: 0px; left: 0px;">
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">10</a>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">20</a>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">50</a>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">100</a>
+                                </div>
+                                {{ $ingredients->links() }}
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <input type="hidden" id="deleteUrl" value="{{url('ingredients')}}/"/>
+    <input type="hidden" id="editUrl" value="{{url('ingredients/edit')}}/"/>
 </x-app-layout>
 <x-slot name="jsFiles">
     <script src="{{ asset("js/ingredients/index.js") }}"></script>

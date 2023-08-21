@@ -90,41 +90,29 @@
                             @endforeach
                             </tbody>
                         </table>
-{{--                        <div class="flex justify-evenly py-4 space-x-2 rtl:space-x-reverse">--}}
-{{--                            <a class="inline-flex w-20 items-center rounded-lg bg-blue-700 px-5 text-center text-sm font-medium text-white items-actual-count py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"--}}
-{{--                               data-dropdown-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">10</a>--}}
-{{--                            <!-- Dropdown menu -->--}}
-{{--                            <div id="dropdown"--}}
-{{--                                 class="z-10 hidden w-44 rounded-lg bg-white shadow items-count divide-y divide-gray-100 dark:bg-gray-700"--}}
-{{--                                 aria-labelledby="navbarDropdown" x-placement="bottom-end"--}}
-{{--                                 style="will-change: transform; position: absolute; transform: translate3d(120px, 48px, 0px); top: 0px; left: 0px;">--}}
-{{--                                <a href="#"--}}
-{{--                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">10</a>--}}
-{{--                                <a href="#"--}}
-{{--                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">20</a>--}}
-{{--                                <a href="#"--}}
-{{--                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">50</a>--}}
-{{--                                <a href="#"--}}
-{{--                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">100</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="pagination-links">--}}
-{{--                            {{ $ingredients->links() }}--}}
-{{--                        </div>--}}
-                        <div class="pagination-links">
+                        <div class="pagination-menu">
                             <div class="flex justify-evenly py-4 space-x-2 rtl:space-x-reverse">
-                                <a class="inline-flex w-20 items-center rounded-lg bg-blue-700 px-5 text-center text-sm font-medium text-white items-actual-count py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-dropdown-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">10</a>
+                                <a class="inline-flex w-20 items-center rounded-lg bg-blue-700 px-5 text-center text-sm font-medium text-white items-actual-count py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                   data-dropdown-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">10</a>
                                 <!-- Dropdown menu -->
-                                <div id="dropdown" class="z-10 hidden w-44 rounded-lg bg-white shadow items-count divide-y divide-gray-100 dark:bg-gray-700" aria-labelledby="navbarDropdown" x-placement="bottom-end" style="will-change: transform; position: absolute; transform: translate3d(120px, 48px, 0px); top: 0px; left: 0px;">
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">10</a>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">20</a>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">50</a>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">100</a>
+                                <div id="dropdown"
+                                     class="z-10 hidden w-44 rounded-lg bg-white shadow items-count divide-y divide-gray-100 dark:bg-gray-700"
+                                     aria-labelledby="navbarDropdown" x-placement="bottom-end"
+                                     style="will-change: transform; position: absolute; transform: translate3d(120px, 48px, 0px); top: 0px; left: 0px;">
+                                    <a href="#"
+                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">10</a>
+                                    <a href="#"
+                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">20</a>
+                                    <a href="#"
+                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">50</a>
+                                    <a href="#"
+                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">100</a>
                                 </div>
-                                {{ $ingredients->links() }}
-
+                                <div class="pagination-links">
+                                    {{ $ingredients->links() }}
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

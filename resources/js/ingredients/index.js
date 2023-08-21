@@ -79,7 +79,8 @@ $(function() {
                     $('tbody#ingredients-list').append(html);
                 });
                 console.log(response.links);
-                // $('.pagination-links a').replaceWith($(response.links).find('a'));
+                $('.pagination-links').empty();
+                $('.pagination-links').append(response.links);
             });
     }
 });

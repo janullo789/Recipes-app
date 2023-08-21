@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('recipes_ingredients', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('recipes_id')->constrained();
             $table->foreignId('ingredients_id')->constrained();
             $table->integer('quantity');

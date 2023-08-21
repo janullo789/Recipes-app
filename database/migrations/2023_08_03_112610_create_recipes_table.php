@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description', 1500);
             $table->text('instruction', 3000);
             $table->enum('diet', RecipeDiet::TYPES)->nullable();
-            $table->enum('time', RecipeDiet::TYPES)->nullable();
+            $table->enum('time', RecipeTime::TYPES)->nullable();
             $table->timestamps();
         });
     }

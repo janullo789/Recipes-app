@@ -378,6 +378,22 @@ class IngredientsSeeder extends Seeder
                 'calories' => 11.0,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'salt',
+                'category' => IngredientCategory::HERBS_AND_SPICES,
+                'unit' => IngredientUnit::G,
+                'calories' => 0,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'pepper',
+                'category' => IngredientCategory::HERBS_AND_SPICES,
+                'unit' => IngredientUnit::G,
+                'calories' => 2.5,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]
         ];
 

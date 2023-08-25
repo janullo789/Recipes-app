@@ -25,8 +25,6 @@ class RecipesSeeder extends Seeder
                               7. Serve immediately!',
                 'diet' => RecipeDiet::VEGETARIAN,
                 'time' => RecipeTime::QUICK,
-                'created_at' => now(),
-                'updated_at' => now(),
                 'ingredients' => [
                     ['name' => 'egg', 'quantity' => 2],
                     ['name' => 'butter', 'quantity' => 10],
@@ -41,7 +39,15 @@ class RecipesSeeder extends Seeder
 
             // Check if the recipe already exists
             if (!DB::table('recipes')->where('name', $recipeName)->exists()) {
-                $recipeId = DB::table('recipes')->insertGetId($recipeData);
+                $recipeId = DB::table('recipes')->insertGetId([
+                    'name' => $recipeName,
+                    'description' => $recipeData['description'],
+                    'instruction' => $recipeData['instruction'],
+                    'diet' => $recipeData['diet'],
+                    'time' => $recipeData['time'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
                 foreach ($recipeData['ingredients'] as $ingredient) {
                     $ingredientId = DB::table('ingredients')
@@ -57,6 +63,51 @@ class RecipesSeeder extends Seeder
             }
         }
     }
+//        $recipes = [
+//            [
+//                'name' => 'Scrambled eggs',
+//                'description' => 'Delicious scrambled eggs from two eggs',
+//                'instruction' => '1. Break two eggs into a bowl.
+//                              2. Beat the eggs with a fork.
+//                              3. Heat a frying pan and add a little butter.
+//                              4. Pour the beaten eggs into the pan.
+//                              5. Gently stir the eggs in the pan until they are set.
+//                              6. Season with salt and pepper.
+//                              7. Serve immediately!',
+//                'diet' => RecipeDiet::VEGETARIAN,
+//                'time' => RecipeTime::QUICK,
+//                'created_at' => now(),
+//                'updated_at' => now(),
+//                'ingredients' => [
+//                    ['name' => 'egg', 'quantity' => 2],
+//                    ['name' => 'butter', 'quantity' => 10],
+//                    ['name' => 'salt', 'quantity' => 1],
+//                    ['name' => 'pepper', 'quantity' => 1],
+//                ],
+//            ],
+//        ];
+//
+//        foreach ($recipes as $recipeData) {
+//            $recipeName = $recipeData['name'];
+//
+//            // Check if the recipe already exists
+//            if (!DB::table('recipes')->where('name', $recipeName)->exists()) {
+//                $recipeId = DB::table('recipes')->insertGetId($recipeData);
+//
+//                foreach ($recipeData['ingredients'] as $ingredient) {
+//                    $ingredientId = DB::table('ingredients')
+//                        ->where('name', $ingredient['name'])
+//                        ->value('id');
+//
+//                    DB::table('recipes_ingredients')->insert([
+//                        'recipes_id' => $recipeId,
+//                        'ingredients_id' => $ingredientId,
+//                        'quantity' => $ingredient['quantity'],
+//                    ]);
+//                }
+//            }
+//        }
+//    }
 //        $recipeId = DB::table('recipes')->insertGetId([
 //            'name' => 'Scrambled eggs',
 //            'description' => 'Delicious scrambled eggs from two eggs',

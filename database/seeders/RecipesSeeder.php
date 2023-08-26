@@ -32,6 +32,39 @@ class RecipesSeeder extends Seeder
                     ['name' => 'pepper', 'quantity' => 1],
                 ],
             ],
+            [
+                'name' => 'Creamy Chicken Alfredo',
+                'description' => 'Delicious and creamy chicken Alfredo pasta with a mix of herbs.',
+                'instruction' => '1. Season the chicken breast with salt, pepper, and a pinch of oregano.
+                               2. Heat a skillet over medium heat and add a tablespoon of olive oil.
+                               3. Add the seasoned chicken breast and cook until it\'s golden brown and cooked through. Remove and set aside.
+                               4. In the same skillet, add another tablespoon of olive oil and sauté sliced bell peppers, zucchini, and spinach until they are tender. Remove and set aside.
+                               5. In a pot of boiling salted water, cook the penne pasta until al dente. Drain and set aside.
+                               6. In the same skillet, melt 2 tablespoons of butter. Add minced garlic and cook until fragrant.
+                               7. Pour in the heavy cream and bring to a simmer. Add grated Parmesan cheese, stirring until the sauce is smooth and creamy.
+                               8. Slice the cooked chicken breast into thin strips and add it back to the skillet along with the sautéed vegetables.
+                               9. Toss in the cooked penne pasta and gently mix everything together.
+                               10. Season with chopped fresh basil and a dash of ground black pepper.
+                               11. Serve the creamy chicken Alfredo in plates or bowls, garnished with additional grated Parmesan cheese and a sprinkle of chopped parsley.',
+                'diet' => null,
+                'time' => RecipeTime::MEDIUM,
+                'ingredients' => [
+                    ['name' => 'chicken breast', 'quantity' => 200],
+                    ['name' => 'salt', 'quantity' => 3],
+                    ['name' => 'pepper', 'quantity' => 3],
+                    ['name' => 'oregano', 'quantity' => 2],
+                    ['name' => 'olive oil', 'quantity' => 15],
+                    ['name' => 'bell pepper', 'quantity' => 1],
+                    ['name' => 'zucchini', 'quantity' => 1],
+                    ['name' => 'spinach', 'quantity' => 2],
+                    ['name' => 'penne', 'quantity' => 200],
+                    ['name' => 'butter', 'quantity' => 50],
+                    ['name' => 'clove of garlic', 'quantity' => 3],
+                    ['name' => 'heavy cream', 'quantity' => 150],
+                    ['name' => 'Parmesan cheese', 'quantity' => 50],
+                    ['name' => 'basil', 'quantity' => 4],
+                ],
+            ]
         ];
 
         foreach ($recipes as $recipeData) {

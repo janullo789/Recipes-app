@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecipesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/ingredients/edit/{ingredient}', [IngredientController::class, 'edit'])->name('ingredients.edit');
     Route::post('/ingredients/{ingredient}', [IngredientController::class, 'update'])->name('ingredients.update');
     Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredients.destroy');
+
+    Route::get('/recipes', [RecipesController::class, 'indexAdmin'])->name('recipes.indexAdmin');
 });
 
 require __DIR__.'/auth.php';

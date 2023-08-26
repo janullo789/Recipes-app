@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recipes;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class RecipesController extends Controller
@@ -13,6 +13,18 @@ class RecipesController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource for admins.
+     */
+    public function indexAdmin()
+    {
+        $recipes = Recipe::with('ingredients')->get();
+
+        return view('recipes.indexAdmin', [
+            'recipes' => $recipes
+        ]);
     }
 
     /**
@@ -34,7 +46,7 @@ class RecipesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recipes $recipes)
+    public function show(Recipe $recipes)
     {
         //
     }
@@ -42,7 +54,7 @@ class RecipesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Recipes $recipes)
+    public function edit(Recipe $recipes)
     {
         //
     }
@@ -50,7 +62,7 @@ class RecipesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Recipes $recipes)
+    public function update(Request $request, Recipe $recipes)
     {
         //
     }
@@ -58,7 +70,7 @@ class RecipesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Recipes $recipes)
+    public function destroy(Recipe $recipes)
     {
         //
     }

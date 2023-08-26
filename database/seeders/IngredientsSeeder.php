@@ -73,7 +73,23 @@ class IngredientsSeeder extends Seeder
                 'calories' => 2,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]
+            ],
+            [
+                'name' => 'heavy cream',
+                'category' => IngredientCategory::EGGS_MILK_AND_MILK_PRODUCTS,
+                'unit' => IngredientUnit::G,
+                'calories' => 3.5,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'parmesan cheese',
+                'category' => IngredientCategory::EGGS_MILK_AND_MILK_PRODUCTS,
+                'unit' => IngredientUnit::G,
+                'calories' => 3.8,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
         ];
         $this->insertFirstOrCreate($eggsMilkAndMilkProducts);
 
@@ -649,7 +665,16 @@ class IngredientsSeeder extends Seeder
                 'calories' => 86.0,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]
+            ],
+            [
+                'name' => 'clove of garlic',
+                'category' => IngredientCategory::VEGETABLES,
+                'unit' => IngredientUnit::PCS,
+                'calories' => 8.0,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+
         ];
 
         $this->insertFirstOrCreate($vegetables);

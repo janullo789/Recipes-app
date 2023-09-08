@@ -41,7 +41,7 @@
 
                     <!-- Diet -->
                     <div class="my-4">
-                        <x-input-label for="diet" :value="__('diet')"/>
+                        <x-input-label for="diet" :value="__('Diet')"/>
                         <select id="diet" name="diet"
                                 class="bg-gray-50 shadow-sm border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" selected>-</option>
@@ -69,9 +69,9 @@
                     <div class="my-4">
                         <x-input-label for="ingredients" :value="__('Ingredients')"/>
                         @foreach($ingredients->groupBy('category') as $category => $categoryIngredients)
-                            <div class="mb-2">
-                                <h2 class="text-lg font-semibold">{{ $category }}</h2>
-                                <div class="flex flex-col">
+                            <div class="mb-2 text-center">
+                                <h2 class="pt-4 text-lg font-semibold">{{ Str::upper($category) }}</h2>
+                                <div class="grid grid-cols-2 gap-4">
                                     @foreach($categoryIngredients as $ingredient)
                                         <div class="flex items-center mt-1">
                                             <label for="ingredient-{{ $ingredient->id }}"
@@ -80,7 +80,7 @@
                                                    value="{{ $ingredient->id }}" hidden>
                                             <input type="number" name="ingredients[{{ $ingredient->id }}][quantity]"
                                                    min="0" step="1" value="0"
-                                                   class="ml-2 px-2 py-1 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500">
+                                                   class="w-1/3 ml-2 px-2 py-1 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500">
                                         </div>
                                     @endforeach
                                 </div>

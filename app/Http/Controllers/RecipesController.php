@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpsertRecipeRequest;
+use App\Models\Ingredient;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 
@@ -32,15 +34,31 @@ class RecipesController extends Controller
      */
     public function create()
     {
-        //
+        $ingredients = Ingredient::all();
+
+        return view('recipes.create', compact('ingredients'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UpsertRecipeRequest $request)
     {
-        //
+        $recipe = new Recipe($request->validated());
+        $recipe->save();
+
+        // Dodawanie składników do przepisu
+        foreach ($request->input('ingredients') as $ingredientData) {
+            $ingredientId = $ingredientData['id'];
+            $quantity = $ingredientData['quantity'];
+
+            if ($quantity > 0) {
+                // Jeśli składnik istnieje, dodaj go do przepisu w tabeli pośredniej
+                $recipe->ingredients()->attach($ingredientId, ['quantity' => $quantity]);
+            }
+        }
+
+        return redirect()->route('recipes.indexAdmin')->with('success', 'Przepis został pomyślnie dodany.');
     }
 
     /**

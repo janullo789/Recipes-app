@@ -76,7 +76,11 @@
                                         {{ $recipe->description }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $recipe->diet }}
+                                        @if(isset($recipe->diet))
+                                            {{ $recipe->diet }}
+                                        @else
+                                            -
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $recipe->time }}
@@ -89,13 +93,19 @@
                                         </ul>
                                     </td>
                                     <td class="px-6 py-4">
+                                        <ul>
+                                            <li>
 {{--                                        <a href="{{ route('ingredients.edit', $ingredient->id) }}"--}}
-                                        <a href="{{ route('ingredients.index') }}"
-                                           class="font-medium text-blue-600 hover:underline dark:text-blue-500">{{ __('Edit') }}</a>
-                                        <button data-id="{{ $recipe->id }}"
-                                                class="ml-2 font-medium text-red-600 delete hover:underline dark:text-blue-500">
-                                            {{ __('Delete') }}
-                                        </button>
+                                                <a href="{{ route('ingredients.index') }}"
+                                                   class="font-medium text-blue-600 hover:underline dark:text-blue-500">{{ __('Edit') }}</a>
+                                            </li>
+                                            <li>
+                                                <button data-id="{{ $recipe->id }}"
+                                                        class="font-medium text-red-600 delete hover:underline dark:text-blue-500">
+                                                    {{ __('Delete') }}
+                                                </button>
+                                            </li>
+                                        </ul>
                                     </td>
                                 </tr>
                             @endforeach

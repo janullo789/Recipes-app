@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredients.destroy');
 
     Route::get('/recipes', [RecipesController::class, 'indexAdmin'])->name('recipes.indexAdmin');
+    Route::get('/recipes/create', [RecipesController::class, 'create'])->name('recipes.create');
+    Route::post('/ingredients', [RecipesController::class, 'store'])->name('recipes.store');
 });
 
 require __DIR__.'/auth.php';

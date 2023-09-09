@@ -9,7 +9,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-xl space-y-6 sm:px-6 lg:px-8">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <form method="POST" action="{{ route('recipes.store') }}" class="px-6">
+                <form method="POST" action="{{ route('recipes.store') }}" class="px-6" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Name -->
@@ -73,14 +73,15 @@
                                 <h2 class="pt-4 text-lg font-semibold">{{ Str::upper($category) }}</h2>
                                 <div class="grid grid-cols-2 gap-4">
                                     @foreach($categoryIngredients as $ingredient)
-                                        <div class="flex items-center mt-1">
+                                        <div class="flex items-center text-left mt-1">
                                             <label for="ingredient-{{ $ingredient->id }}"
                                                    class="inline-flex items-center mt-1">{{ $ingredient->name }}</label>
                                             <input type="number" name="ingredients[{{ $ingredient->id }}][id]"
                                                    value="{{ $ingredient->id }}" hidden>
                                             <input type="number" name="ingredients[{{ $ingredient->id }}][quantity]"
-                                                   min="0" step="1" value="0"
+                                                   min="0" step="1" value=0
                                                    class="w-1/3 ml-2 px-2 py-1 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500">
+                                            <span class="ml-1 text-sm text-gray-500">[{{ $ingredient->unit }}]</span>
                                         </div>
                                     @endforeach
                                 </div>
@@ -89,6 +90,14 @@
                         <x-input-error :messages="$errors->get('ingredients')" class="mt-2"/>
                     </div>
 
+                    <!-- Image -->
+                    <div class="my-4">
+                        <x-input-label for="image" :value="__('Image')"/>
+                        <input id="image" class="block mt-1 w-full" type="file" name="image"
+                                      :value="old('image')"
+                                      autofocus/>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2"/>
+                    </div>
 
                     <div class="flex items-center justify-between my-4">
                         <a href="{{ route('recipes.indexAdmin') }}">

@@ -25,9 +25,9 @@ class UpsertRecipeRequest extends FormRequest
             'diet' => ['nullable', Rule::in(RecipeDiet::TYPES)],
             'time' => ['nullable', Rule::in(RecipeTime::TYPES)],
             //'image_path' => ['nullable', 'image', 'mimes:jpg,png'],
-            //'ingredients' => ['required', 'array'],
-            //'ingredients.*.id' => ['integer', 'exists:ingredients,id'],
-            //'ingredients.*.quantity' => ['required', 'integer', 'min:1'],
+            'ingredients' => ['required', 'array'],
+            'ingredients.*.id' => ['integer', 'exists:ingredients,id'],
+            'ingredients.*.quantity' => ['required', 'integer'],
         ];
     }
 }

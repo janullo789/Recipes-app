@@ -14,7 +14,8 @@ class Recipe extends Model
         'description',
         'instruction',
         'diet',
-        'time'
+        'time',
+        'image_path'
     ];
 
     public function ingredients()

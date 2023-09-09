@@ -12,7 +12,7 @@
                 <div class="flex items-start">
                     <form class="border-gray-200 p-6 text-xl" id="sidebar-filter">
                         <div class="flex content-center justify-center">
-                            <a href="{{ route('ingredients.index') }}"
+                            <a href="{{ route('recipes.create') }}"
                                class="mb-10 rounded border border-gray-400 bg-green-400 px-4 py-2 uppercase text-gray-800 shadow hover:bg-green-500">
                                 {{ __('Add new recipe') }}
                             </a>

@@ -45,20 +45,19 @@ class RecipesController extends Controller
     public function store(UpsertRecipeRequest $request)
     {
         $recipe = new Recipe($request->validated());
+        $recipe->image_path = $request->file('image')->storeAs('recipes', $request->name);
         $recipe->save();
 
-        // Dodawanie składników do przepisu
         foreach ($request->input('ingredients') as $ingredientData) {
             $ingredientId = $ingredientData['id'];
-            $quantity = $ingredientData['quantity'];
+            $quantity = intval($ingredientData['quantity']);
 
             if ($quantity > 0) {
-                // Jeśli składnik istnieje, dodaj go do przepisu w tabeli pośredniej
                 $recipe->ingredients()->attach($ingredientId, ['quantity' => $quantity]);
             }
         }
 
-        return redirect()->route('recipes.indexAdmin')->with('success', 'Przepis został pomyślnie dodany.');
+        return redirect()->route('recipes.indexAdmin')->with('success', 'Recipe has been created.');
     }
 
     /**

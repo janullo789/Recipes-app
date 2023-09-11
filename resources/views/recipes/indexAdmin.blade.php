@@ -95,9 +95,8 @@
                                     <td class="px-6 py-4">
                                         <ul>
                                             <li>
-{{--                                        <a href="{{ route('ingredients.edit', $ingredient->id) }}"--}}
-                                                <a href="{{ route('ingredients.index') }}"
-                                                   class="font-medium text-blue-600 hover:underline dark:text-blue-500">{{ __('Edit') }}</a>
+                                                <a href="{{ route('recipes.edit', $recipe->id) }}"
+                                                    class="font-medium text-blue-600 hover:underline dark:text-blue-500">{{ __('Edit') }}</a>
                                             </li>
                                             <li>
                                                 <button data-id="{{ $recipe->id }}"
@@ -140,9 +139,9 @@
             </div>
         </div>
     </div>
-{{--    <input type="hidden" id="deleteUrl" value="{{url('ingredients')}}/"/>--}}
-{{--    <input type="hidden" id="editUrl" value="{{url('ingredients/edit')}}/"/>--}}
+    <input type="hidden" id="deleteUrl" value="{{url('$recipes')}}/"/>
+    <input type="hidden" id="editUrl" value="{{url('$recipes/edit')}}/"/>
 </x-app-layout>
 <x-slot name="jsFiles">
-{{--    <script src="{{ asset("js/ingredients/index.js") }}"></script>--}}
+    <script src="{{ asset("js/recipes/index.js") }}"></script>
 </x-slot>

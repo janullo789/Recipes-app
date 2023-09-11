@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RecipesController;
+use App\Http\Controllers\RecipeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,9 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/ingredients/{ingredient}', [IngredientController::class, 'update'])->name('ingredients.update');
     Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredients.destroy');
 
-    Route::get('/recipes', [RecipesController::class, 'indexAdmin'])->name('recipes.indexAdmin');
-    Route::get('/recipes/create', [RecipesController::class, 'create'])->name('recipes.create');
-    Route::post('/ingredients', [RecipesController::class, 'store'])->name('recipes.store');
+    Route::get('/recipesAdmin', [RecipeController::class, 'indexAdmin'])->name('recipes.indexAdmin');
+    Route::get('/recipesAdmin/create', [RecipeController::class, 'create'])->name('recipes.create');
+    Route::post('/recipesAdmin', [RecipeController::class, 'store'])->name('recipes.store');
+    Route::get('/recipesAdmin/edit/{recipe}', [RecipeController::class, 'edit'])->name('recipes.edit');
+    Route::post('/recipesAdmin/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
 });
 
 require __DIR__.'/auth.php';

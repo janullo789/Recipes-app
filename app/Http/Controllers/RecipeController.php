@@ -6,8 +6,9 @@ use App\Http\Requests\UpsertRecipeRequest;
 use App\Models\Ingredient;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class RecipesController extends Controller
+class RecipeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,7 +46,7 @@ class RecipesController extends Controller
     public function store(UpsertRecipeRequest $request)
     {
         $recipe = new Recipe($request->validated());
-        $recipe->image_path = $request->file('image')->storeAs('recipes', $request->name);
+        $recipe->image_path = Storage::disk('public')->put('recipes', $request->file('image'));
         $recipe->save();
 
         foreach ($request->input('ingredients') as $ingredientData) {
@@ -63,7 +64,7 @@ class RecipesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recipe $recipes)
+    public function show(Recipe $recipe)
     {
         //
     }
@@ -71,23 +72,27 @@ class RecipesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Recipe $recipes)
+    public function edit(Recipe $recipe)
     {
-        //
+        return view("recipes.edit", [
+            'recipe' => $recipe
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Recipe $recipes)
+    public function update(Request $request, Recipe $recipe)
     {
-        //
+        $recipe->fill($request->all());
+        $recipe->save();
+        return redirect(route('recipes.indexAdmin'))->with('status', 'Recipe updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Recipe $recipes)
+    public function destroy(Recipe $recipe)
     {
         //
     }

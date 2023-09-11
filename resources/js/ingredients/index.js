@@ -18,7 +18,7 @@ $(function() {
                     method: "DELETE",
                     url: deleteUrl + $(this).data("id"),
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Include the CSRF token
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 })
                     .done(function (data) {

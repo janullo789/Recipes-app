@@ -13,7 +13,6 @@ $(function() {
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.value) {
-                console.log(deleteUrl + $(this).data("id"));
                 $.ajax({
                     method: "DELETE",
                     url: deleteUrl + $(this).data("id"),

@@ -98,7 +98,6 @@ class IngredientController extends Controller
     {
         try {
             $ingredient->delete();
-            //Session::flash('status', 'Ingredient deleted!');
             return response()->json([
                 'status' => 'success'
             ]);

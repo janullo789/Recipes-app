@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Ingredients') }}
+            {{ __('Recipes') }}
         </h2>
     </x-slot>
 
@@ -139,8 +139,8 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="deleteUrl" value="{{url('$recipes')}}/"/>
-    <input type="hidden" id="editUrl" value="{{url('$recipes/edit')}}/"/>
+    <input type="hidden" id="deleteUrl" value="{{url('recipesAdmin')}}/"/>
+    <input type="hidden" id="editUrl" value="{{url('recipesAdmin/edit')}}/"/>
 </x-app-layout>
 <x-slot name="jsFiles">
     <script src="{{ asset("js/recipes/index.js") }}"></script>

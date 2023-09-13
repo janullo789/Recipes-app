@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Swal from "sweetalert2";
 
-$(function() {
+$(function () {
     let deleteUrl = $("#deleteUrl").val();
     let editUrl = $("#editUrl").val();
     $(document).on('click', 'button.delete', function () {
@@ -13,7 +13,6 @@ $(function() {
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.value) {
-                console.log(deleteUrl + $(this).data("id"));
                 $.ajax({
                     method: "DELETE",
                     url: deleteUrl + $(this).data("id"),
@@ -23,7 +22,7 @@ $(function() {
                 })
                     .done(function (data) {
                         event.preventDefault();
-                        getItems($('a.items-actual-count').text());
+                        window.location.reload();
                     })
                     .fail(function (data) {
                         Swal.fire('Oops...', data.responseJSON.message, data.responseJSON.status);

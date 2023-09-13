@@ -94,6 +94,17 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        //
+        try {
+            $recipe->ingredients()->detach();
+            $recipe->delete();
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error occured!'
+            ])->setStatusCode(500);
+        }
     }
 }

@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/recipesAdmin', [RecipeController::class, 'store'])->name('recipes.store');
     Route::get('/recipesAdmin/edit/{recipe}', [RecipeController::class, 'edit'])->name('recipes.edit');
     Route::post('/recipesAdmin/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
+    Route::delete('/recipesAdmin/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
 });
 
 require __DIR__.'/auth.php';

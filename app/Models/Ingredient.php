@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Enums\Ingredient\IngredientCategory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Ingredient extends Model
 {
@@ -26,5 +27,13 @@ class Ingredient extends Model
     public function recipes(): BelongsToMany
     {
         return $this->belongsToMany(Recipe::class, 'recipes_ingredients');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function userIngredients(): HasMany
+    {
+        return $this->hasMany(UserIngredient::class);
     }
 }

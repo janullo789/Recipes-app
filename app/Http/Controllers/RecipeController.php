@@ -31,6 +31,18 @@ class RecipeController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function mainSite()
+    {
+        $recipes = Recipe::with('ingredients')->get();
+
+        return view('mainSite', [
+            'recipes' => $recipes
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

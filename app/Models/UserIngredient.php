@@ -12,7 +12,7 @@ class UserIngredient extends Model
     protected $fillable = [
         'user_id',
         'ingredient_id',
-        'amount'
+        'quantity'
     ];
 
     public function user()

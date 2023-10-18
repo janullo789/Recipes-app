@@ -23,4 +23,14 @@ class Recipe extends Model
         return $this->belongsToMany(Ingredient::class, 'recipes_ingredients', 'recipes_id', 'ingredients_id')
             ->withPivot('quantity');
     }
+
+    /**
+     * @param $query
+     * @param $value
+     * @return void
+     */
+    public function scopeSearch($query, $value)
+    {
+        $query->where('id', 'like', "%{$value}%")->orWhere('name', 'like', "%{$value}%");
+    }
 }

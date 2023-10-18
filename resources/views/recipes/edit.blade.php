@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="flex items-center justify-between my-4">
-                       <a href="{{ route('recipes.indexAdmin') }}">
+                       <a href="{{ route('recipes.index') }}">
                             <x-back-button>
                                 {{ __('Back') }}
                             </x-back-button>

@@ -45,12 +45,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
-    Route::get('/recipesAdmin', [RecipeController::class, 'indexAdmin'])->name('recipes.indexAdmin');
+    Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
     Route::get('/recipesAdmin/create', [RecipeController::class, 'create'])->name('recipes.create');
-    Route::post('/recipesAdmin', [RecipeController::class, 'store'])->name('recipes.store');
-    Route::get('/recipesAdmin/edit/{recipe}', [RecipeController::class, 'edit'])->name('recipes.edit');
-    Route::post('/recipesAdmin/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
-    Route::delete('/recipesAdmin/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+    Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
+    Route::get('/recipes/edit/{recipe}', [RecipeController::class, 'edit'])->name('recipes.edit');
+    Route::post('/recipes/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
+    Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
 });
 
 require __DIR__.'/auth.php';

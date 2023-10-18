@@ -17,7 +17,7 @@ class IngredientsTable extends Component
     public $search = '';
 
     #[Url(history: true)]
-    public $category = '';
+    public $category= '';
 
     #[Url(history: true)]
     public $sortBy = 'name';

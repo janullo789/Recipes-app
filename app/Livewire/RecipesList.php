@@ -2,13 +2,23 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use App\Models\Recipe;
 use App\Models\UserIngredient;
 use Illuminate\Support\Facades\Auth;
 
-class RecipeList extends Component
+class RecipesList extends Component
 {
+    #[Url(history: true)]
+    public $search = '';
+
+    #[Url(history: true)]
+    public $diet = '';
+
+    #[Url(history: true)]
+    public $time = '';
+
     public $showOnlyAvailable = false;
 
     public function render()
@@ -21,7 +31,15 @@ class RecipeList extends Component
             ->toArray();
 
         // Pobierz wszystkie przepisy
-        $allRecipes = Recipe::with('ingredients')->get();
+        $allRecipes = Recipe::with('ingredients')
+            ->search($this->search)
+            ->when($this->diet !== '', function($query){
+                $query->where('diet', $this->diet);
+            })
+            ->when($this->time !== '', function($query){
+                $query->where('time', $this->time);
+            })
+            ->get();
         $availableRecipes = collect();
 
         foreach ($allRecipes as $recipe) {
@@ -43,7 +61,9 @@ class RecipeList extends Component
             }
         }
 
-        return view('livewire.recipe-list', ['recipes' => $availableRecipes]);
+        return view('livewire.recipes-list', [
+            'recipes' => $availableRecipes,
+        ]);
     }
 
 

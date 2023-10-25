@@ -24,11 +24,8 @@ class RecipeController extends Controller
      */
     public function mainSite()
     {
-        $recipes = Recipe::with('ingredients')->get();
-
-        return view('mainSite', [
-            'recipes' => $recipes
-        ]);
+        return view('mainSite');
+        // in livewire
     }
 
     /**

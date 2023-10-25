@@ -19,23 +19,8 @@ class IngredientController extends Controller
      */
     public function index(Request $request): View|Application|Factory|JsonResponse
     {
-        $filters = $request->query('filter');
-        $paginate = $request->query('paginate') ?? 10;
-        $query = Ingredient::query();
-        if (!is_null($filters) && isset($filters['categories'])) {
-            $query = $query->whereIn('category', $filters['categories']);
-        }
-
-        $ingredients = $query->paginate($paginate);
-
-        if ($request->ajax()) {
-            return response()->json($ingredients);
-        }
-
-        return view('ingredients.index', [
-            'ingredients' => $ingredients,
-            'categories' => Ingredient::distinct('category')->pluck('category')
-        ]);
+        return view('ingredients.index');
+        // in livewire
     }
 
     /**

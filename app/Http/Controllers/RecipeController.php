@@ -11,23 +11,12 @@ use Illuminate\Support\Facades\Storage;
 class RecipeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource for admins.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Display a listing of the resource for admins.
-     */
-    public function indexAdmin()
-    {
-        $recipes = Recipe::with('ingredients')->get();
-
-        return view('recipes.indexAdmin', [
-            'recipes' => $recipes
-        ]);
+        return view('recipes.index');
+        // in livewire
     }
 
     /**
@@ -35,11 +24,8 @@ class RecipeController extends Controller
      */
     public function mainSite()
     {
-        $recipes = Recipe::with('ingredients')->get();
-
-        return view('mainSite', [
-            'recipes' => $recipes
-        ]);
+        return view('mainSite');
+        // in livewire
     }
 
     /**
@@ -70,7 +56,7 @@ class RecipeController extends Controller
             }
         }
 
-        return redirect()->route('recipes.indexAdmin')->with('success', 'Recipe has been created.');
+        return redirect()->route('recipes.index')->with('success', 'Recipe has been created.');
     }
 
     /**
@@ -78,7 +64,7 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        //
+        return view('recipes.show', ['recipe' => $recipe]);
     }
 
     /**
@@ -98,7 +84,7 @@ class RecipeController extends Controller
     {
         $recipe->fill($request->all());
         $recipe->save();
-        return redirect(route('recipes.indexAdmin'))->with('status', 'Recipe updated!');
+        return redirect(route('recipes.index'))->with('status', 'Recipe updated!');
     }
 
     /**
@@ -106,17 +92,6 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        try {
-            $recipe->ingredients()->detach();
-            $recipe->delete();
-            return response()->json([
-                'status' => 'success'
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Error occured!'
-            ])->setStatusCode(500);
-        }
+        // in livewire
     }
 }

@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Ingredients') }}
+            {{ __('Przepisy') }}
         </h2>
     </x-slot>
 
     <div>
-        @livewire('ingredients-table')
+        @livewire('recipes-table');
     </div>
 
 </x-app-layout>

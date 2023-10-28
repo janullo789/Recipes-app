@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/mainSite', [RecipeController::class, 'mainSite'])->name('mainSite');
+Route::get('/', [RecipeController::class, 'mainSite'])->name('mainSite');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,7 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/fridge', [FridgeController::class, 'index'])->name('fridge.index');
     Route::post('/fridge', [FridgeController::class, 'store'])->name('fridge.store');
 
+});
 
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
     Route::get('/ingredients/create', [IngredientController::class, 'create'])->name('ingredients.create');
     Route::post('/ingredients', [IngredientController::class, 'store'])->name('ingredients.store');
@@ -39,14 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/ingredients/{ingredient}', [IngredientController::class, 'update'])->name('ingredients.update');
     Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredients.destroy');
 
-    Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
-
     Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
-    Route::get('/recipesAdmin/create', [RecipeController::class, 'create'])->name('recipes.create');
+    Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
     Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
     Route::get('/recipes/edit/{recipe}', [RecipeController::class, 'edit'])->name('recipes.edit');
     Route::post('/recipes/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
     Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
 });
+
+Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
 require __DIR__.'/auth.php';

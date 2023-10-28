@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-bold text-2xl text-indigo-700 leading-tight">
-            {{ __('My Fridge') }}
+            {{ __('Twoja lodówka') }}
         </h2>
     </x-slot>
 
@@ -24,7 +24,8 @@
                                     @foreach ($ingredientsGroup as $ingredient)
                                         <div class="flex flex-col p-2 rounded-lg shadow hover:shadow-md transition ease-in-out duration-150
                                                 {{ isset($user_ingredients[$ingredient->id]) ? 'bg-green-100' : 'bg-white' }}">
-                                            <p class="text-md font-medium mb-1">{{ $ingredient->name }}</p>
+                                            <p class="text-md font-medium mb-1">{{ $ingredient->name }}<span
+                                                    class="text-sm text-gray-500"> [{{ $ingredient->unit }}]</span></p>
                                             <input type="number"
                                                    name="quantity[{{ $ingredient->id }}]"
                                                    value="{{ $user_ingredients[$ingredient->id]->quantity ?? '' }}"
@@ -34,7 +35,8 @@
                                 </div>
                             </div>
                         @endforeach
-                        <button type="submit" class="mt-4 w-full sm:w-auto bg-indigo-700 text-white py-2 px-4 rounded hover:bg-indigo-600">
+                        <button type="submit"
+                                class="mt-4 w-full sm:w-auto bg-indigo-700 text-white py-2 px-4 rounded hover:bg-indigo-600">
                             Zapisz
                         </button>
                     </form>

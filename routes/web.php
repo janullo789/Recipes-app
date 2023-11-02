@@ -4,6 +4,8 @@ use App\Http\Controllers\FridgeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ShopMapController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,5 +52,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
+
+Route::get('/shops', [ShopMapController::class, 'index']);
+Route::get('/our_shops', [ShopMapController::class, 'index'])->name('shop_map.index');
+Route::resource('shops', ShopController::class);
 
 require __DIR__.'/auth.php';

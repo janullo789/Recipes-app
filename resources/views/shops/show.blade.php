@@ -1,21 +1,20 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-2xl font-semibold leading-tight text-gray-800">
-            {{ __('shop.detail') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-6">
+    <div class="py-6 bg-gray-100">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="bg-white overflow-hidden shadow-lg rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-300">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-white overflow-hidden shadow rounded-lg">
                             <div class="px-4 py-5 sm:p-6">
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <tbody class="bg-white divide-y divide-gray-200">
                                     <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.name') }}</td><td class="text-sm text-gray-500">{{ $shop->name }}</td></tr>
-                                    <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.address') }}</td><td class="text-sm text-gray-500">{{ $shop->address }}</td></tr>
+                                    @if($shop->address)
+                                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.category') }}</td><td class="text-sm text-gray-500">{{ $shop->category }}</td></tr>
+                                    @endif
+                                    @if($shop->address)
+                                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.address') }}</td><td class="text-sm text-gray-500">{{ $shop->address }}</td></tr>
+                                    @endif
                                     <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.latitude') }}</td><td class="text-sm text-gray-500">{{ $shop->latitude }}</td></tr>
                                     <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.longitude') }}</td><td class="text-sm text-gray-500">{{ $shop->longitude }}</td></tr>
                                     </tbody>

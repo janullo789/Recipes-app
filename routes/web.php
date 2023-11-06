@@ -54,7 +54,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
 Route::get('/shops', [ShopMapController::class, 'index']);
-Route::get('/our_shops', [ShopMapController::class, 'index'])->name('shop_map.index');
+Route::get('/shops/map', [ShopMapController::class, 'index'])->name('shop_map.index');
 Route::resource('shops', ShopController::class);
 
 require __DIR__.'/auth.php';

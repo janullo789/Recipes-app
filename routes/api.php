@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['as' => 'api.', 'namespace' => 'Api'], function () {
-    Route::get('shops', [ShopController::class, 'index'])->name('shops.index');
+    Route::get('/shops', [ShopController::class, 'index'])->name('shops.index');
 });

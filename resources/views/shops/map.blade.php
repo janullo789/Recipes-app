@@ -5,15 +5,15 @@
         </h2>
     </x-slot>
 
-    <div class="p-6 bg-white shadow rounded-lg">
-        <div id="mapid" class="h-96"></div>  <!-- Zaktualizowano -->
+    <div class="py-6 bg-gray-100">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-lg rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-300">
+                    <div id="mapid" class="h-128 my-6"></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-{{--    @push('styles')--}}
-{{--        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"--}}
-{{--              integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="--}}
-{{--              crossorigin=""/>--}}
-{{--    @endpush--}}
 
     <x-slot name="javaScript">
                 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -46,24 +46,24 @@
                             console.log(error);
                         });
 
-                    @can('create', new App\Models\Shop)
-                    var theMarker;
+                    @can('isAdmin', auth()->user())
+                        var theMarker;
 
-                    map.on('click', function(e) {
-                        let latitude = e.latlng.lat.toString().substring(0, 15);
-                        let longitude = e.latlng.lng.toString().substring(0, 15);
+                        map.on('click', function(e) {
+                            let latitude = e.latlng.lat.toString().substring(0, 15);
+                            let longitude = e.latlng.lng.toString().substring(0, 15);
 
-                        if (theMarker !== undefined) {
-                            map.removeLayer(theMarker);
-                        }
+                            if (theMarker !== undefined) {
+                                map.removeLayer(theMarker);
+                            }
 
-                        var popupContent = "Your location : " + latitude + ", " + longitude + ".";
-                        popupContent += '<br><a href="{{ route('shops.create') }}?latitude=' + latitude + '&longitude=' + longitude + '">Add new shop here</a>';
+                            var popupContent = "Your location : " + latitude + ", " + longitude + ".";
+                            popupContent += '<br><a href="{{ route('shops.create') }}?latitude=' + latitude + '&longitude=' + longitude + '">Add new shop here</a>';
 
-                        theMarker = L.marker([latitude, longitude]).addTo(map);
-                        theMarker.bindPopup(popupContent)
-                            .openPopup();
-                    });
+                            theMarker = L.marker([latitude, longitude]).addTo(map);
+                            theMarker.bindPopup(popupContent)
+                                .openPopup();
+                        });
                     @endcan
                 </script>
     </x-slot>

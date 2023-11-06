@@ -52,4 +52,16 @@ class Shop extends Model
             $this->coordinate
         );
     }
+
+    /**
+     * @param $query
+     * @param $value
+     * @return void
+     */
+    public function scopeSearch($query, $value)
+    {
+        $query->where('id', 'like', "%{$value}%")
+            ->orWhere('name', 'like', "%{$value}%")
+            ->orWhere('address', 'like', "%{$value}%");
+    }
 }

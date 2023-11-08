@@ -24,6 +24,11 @@
                         </x-nav-link>
                     </div>
                 @endauth
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('shop_map.index')" :active="request()->routeIs('shop_map.index')">
+                        {{ __('Mapa sklepów') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

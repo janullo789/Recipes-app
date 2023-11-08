@@ -14,28 +14,29 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
+// Uncommented the '/' route to point to the main site
 Route::get('/', [RecipeController::class, 'mainSite'])->name('mainSite');
 
+// Publicly accessible shop map page
+Route::get('/shops/map', [ShopMapController::class, 'index'])->name('shop_map.index');
+
 Route::middleware('auth')->group(function () {
+    // All routes that require user to be authenticated
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/fridge', [FridgeController::class, 'index'])->name('fridge.index');
     Route::post('/fridge', [FridgeController::class, 'store'])->name('fridge.store');
-
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    // Routes for ingredients and recipes that require admin role
     Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
     Route::get('/ingredients/create', [IngredientController::class, 'create'])->name('ingredients.create');
     Route::post('/ingredients', [IngredientController::class, 'store'])->name('ingredients.store');
@@ -49,12 +50,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/recipes/edit/{recipe}', [RecipeController::class, 'edit'])->name('recipes.edit');
     Route::post('/recipes/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
     Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+
+    Route::resource('shops', ShopController::class)->except(['index']);
 });
 
+// Show individual recipe, accessible to everyone
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
-Route::get('/shops', [ShopMapController::class, 'index']);
-Route::get('/shops/map', [ShopMapController::class, 'index'])->name('shop_map.index');
-Route::resource('shops', ShopController::class);
+// Authenticated-only access to the shops index route
+Route::get('/shops', [ShopController::class, 'index'])->middleware('auth')->name('shops.index');
 
+// Include other necessary route definitions like auth routes
 require __DIR__.'/auth.php';

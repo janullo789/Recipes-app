@@ -9,7 +9,6 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        //$this->authorize('manage_shop');
         $shopQuery = Shop::query();
         $shopQuery->where('name', 'like', '%'.request('q').'%');
         $shops = $shopQuery->paginate(25);

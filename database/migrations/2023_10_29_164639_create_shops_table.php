@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name', 120)->default('Sklep');
             $table->string('category', 60)->nullable();
             $table->string('address', 255)->nullable();
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
+            $table->decimal('latitude', 15, 12);
+            $table->decimal('longitude', 15, 12);
             $table->timestamps();
         });
     }

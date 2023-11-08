@@ -32,8 +32,8 @@ class ShopController extends Controller
             'name'      => 'required|max:120',
             'category'  => 'nullable|max:60',
             'address'   => 'nullable|max:255',
-            'latitude'  => 'required|max:10',
-            'longitude' => 'required|max:11',
+            'latitude'  => 'required|max:15',
+            'longitude' => 'required|max:15',
         ]);
         $newShop['creator_id'] = auth()->id();
 
@@ -62,8 +62,8 @@ class ShopController extends Controller
             'name'      => 'required|max:120',
             'category'  => 'nullable|max:60',
             'address'   => 'nullable|max:255',
-            'latitude'  => 'required|max:10',
-            'longitude' => 'required|max:11',
+            'latitude'  => 'required|max:15',
+            'longitude' => 'required|max:15',
         ]);
         $shop->update($shopData);
 

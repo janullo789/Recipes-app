@@ -8,15 +8,15 @@
                             <div class="px-4 py-5 sm:p-6">
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.name') }}</td><td class="text-sm text-gray-500">{{ $shop->name }}</td></tr>
+                                    <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('Nazwa') }}</td><td class="text-sm text-gray-500">{{ $shop->name }}</td></tr>
                                     @if($shop->address)
-                                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.category') }}</td><td class="text-sm text-gray-500">{{ $shop->category }}</td></tr>
+                                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('Kategoria') }}</td><td class="text-sm text-gray-500">{{ $shop->category }}</td></tr>
                                     @endif
                                     @if($shop->address)
-                                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.address') }}</td><td class="text-sm text-gray-500">{{ $shop->address }}</td></tr>
+                                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('Adres') }}</td><td class="text-sm text-gray-500">{{ $shop->address }}</td></tr>
                                     @endif
-                                    <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.latitude') }}</td><td class="text-sm text-gray-500">{{ $shop->latitude }}</td></tr>
-                                    <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('shop.longitude') }}</td><td class="text-sm text-gray-500">{{ $shop->longitude }}</td></tr>
+                                    <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('Szerokość geograficzna') }}</td><td class="text-sm text-gray-500">{{ $shop->latitude }}</td></tr>
+                                    <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ __('Długość geograficzna') }}</td><td class="text-sm text-gray-500">{{ $shop->longitude }}</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -31,11 +31,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex justify-end space-x-2 mt-4">
-                        @can('update', $shop)
-                            <a href="{{ route('shops.edit', $shop) }}" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-lg transition duration-300">{{ __('shop.edit') }}</a>
-                        @endcan
-                        <a href="{{ route('shops.index') }}" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg transition duration-300">{{ __('shop.back_to_index') }}</a>
+                    <div class="flex items-center justify-between my-4">
+                        <a href="{{ route('shops.index') }}">
+                            <x-back-button>
+                                {{ __('Wróć') }}
+                            </x-back-button>
+                        </a>
                     </div>
                 </div>
             </div>

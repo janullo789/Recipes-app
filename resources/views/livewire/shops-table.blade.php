@@ -17,11 +17,12 @@
                                     class="h-12 w-full rounded-lg border border-gray-300 px-4 text-lg text-gray-500 focus:border-blue-500 focus:ring-blue-500">
                                 <option value="">{{ __('wszystkie') }}</option>
                                 <option value="supermarket">{{ __('supermarket') }}</option>
-                                <option value="bakery">{{ __('piekarnia') }}</option>
+                                <option value="piekarnia">{{ __('piekarnia') }}</option>
                                 <option value="kiosk">{{ __('kiosk') }}</option>
-                                <option value="mall">{{ __('centrum handlowe') }}</option>
-                                <option value="general">{{ __('ogólny') }}</option>
-                                <option value="convenience">{{ __('wielobranżowy') }}</option>
+                                <option value="centrum handlowe">{{ __('centrum handlowe') }}</option>
+                                <option value="ogólny">{{ __('ogólny') }}</option>
+                                <option value="wielobranżowy">{{ __('wielobranżowy') }}</option>
+                                <option value="inny">{{ __('inny') }}</option>
                             </select>
                         </div>
 
@@ -59,7 +60,7 @@
                                         {{ $shop->id }}</th>
                                     <td class="px-6 py-4">{{ $shop->name }}</td>
                                     <td class="px-6 py-4">{{ $shop->category }}</td>
-                                    <td class="px-6 py-4">{{ $shop->adres }}</td>
+                                    <td class="px-6 py-4">{{ $shop->address }}</td>
                                     <td class="px-6 py-4">{{ $shop->latitude }}, {{ $shop->longitude }}</td>
                                     <td class="flex items-center justify-end px-6 py-4">
                                         <a href="{{ route('shops.edit', $shop->id) }}"

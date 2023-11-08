@@ -69,11 +69,11 @@
                     <div class="flex items-center justify-between my-4">
                        <a href="{{ route('recipes.index') }}">
                             <x-back-button>
-                                {{ __('Back') }}
+                                {{ __('Wróć') }}
                             </x-back-button>
                         </a>
                         <x-primary-button>
-                            {{ __('Save') }}
+                            {{ __('Zapisz') }}
                         </x-primary-button>
                     </div>
                 </form>

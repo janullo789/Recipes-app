@@ -74,6 +74,19 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
+                            @can('isAdmin', auth()->user())
+                                <div class="bg-gray-200 p-2 text-center uppercase">{{ __('Zarządzanie') }}</div>
+                                <x-dropdown-link :href="route('ingredients.index')" class="bg-gray-200">
+                                    {{ __('Składniki') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('recipes.index')" class="bg-gray-200">
+                                    {{ __('Przepisy') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('shops.index')" class="bg-gray-200">
+                                    {{ __('Sklepy') }}
+                                </x-dropdown-link>
+                            @endcan
+
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -142,6 +155,20 @@
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
+
+                    @can('isAdmin', auth()->user())
+                        <div class="bg-gray-200 p-2 text-center uppercase">{{ __('Zarządzanie') }}</div>
+                        <x-responsive-nav-link :href="route('ingredients.index')" class="bg-gray-200">
+                            {{ __('Składniki') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('recipes.index')" class="bg-gray-200">
+                            {{ __('Przepisy') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('shops.index')" class="bg-gray-200">
+                            {{ __('Sklepy') }}
+                        </x-responsive-nav-link>
+                    @endcan
+
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">

@@ -6,6 +6,7 @@ use App\Http\Requests\UpsertRecipeRequest;
 use App\Models\Ingredient;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
@@ -64,7 +65,15 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        return view('recipes.show', ['recipe' => $recipe]);
+        $totalCalories = DB::table('recipes_ingredients')
+            ->where('recipes_id', $recipe->id)
+            ->join('ingredients', 'recipes_ingredients.ingredients_id', '=', 'ingredients.id')
+            ->sum(DB::raw('ingredients.calories * recipes_ingredients.quantity'));
+
+        return view('recipes.show', [
+            'recipe' => $recipe,
+            'totalCalories' => $totalCalories,
+        ]);
     }
 
     /**

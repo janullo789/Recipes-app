@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpsertRecipeRequest;
 use App\Models\Ingredient;
 use App\Models\Recipe;
+use App\Models\RecipeExecution;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -102,5 +103,51 @@ class RecipeController extends Controller
     public function destroy(Recipe $recipe)
     {
         // in livewire
+    }
+
+    public function executeRecipe(Request $request, $recipeId)
+    {
+        $recipe = Recipe::with('ingredients')->findOrFail($recipeId);
+        $user = auth()->user();
+        $userIngredients = $user->userIngredients;
+        $missingIngredients = [];
+
+        foreach ($recipe->ingredients as $ingredient) {
+            $userIngredient = $userIngredients
+                ->firstWhere('ingredient_id', $ingredient->id);
+
+            if (!$userIngredient || $userIngredient->quantity < $ingredient->pivot->quantity) {
+                $missingIngredients[$ingredient->name] = [
+                    'quantity' => $ingredient->pivot->quantity - $userIngredient->quantity,
+                    'unit' => $ingredient->unit
+                ];
+            }
+        }
+
+        if (!empty($missingIngredients)) {
+            return redirect()->route('recipes.show', $recipeId)->with('missingIngredients', $missingIngredients);
+        }
+
+        foreach ($recipe->ingredients as $ingredient) {
+            $userIngredient = $userIngredients->firstWhere('ingredient_id', $ingredient->id);
+            $userIngredient->update([
+                'quantity' => $userIngredient->quantity - $ingredient->pivot->quantity
+            ]);
+        }
+
+        RecipeExecution::create([
+            'user_id' => auth()->id(),
+            'recipe_id' => $recipeId,
+        ]);
+
+        $usedIngredients = $recipe->ingredients->map(function ($ingredient) {
+            return [
+                'name' => $ingredient->name,
+                'quantity' => $ingredient->pivot->quantity,
+                'unit' => $ingredient->unit
+            ];
+        });
+
+        return back()->with('success', 'Przepis wykonany!')->with('usedIngredients', json_encode($usedIngredients));
     }
 }

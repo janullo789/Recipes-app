@@ -60,5 +60,8 @@ Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipe
 // Authenticated-only access to the shops index route
 Route::get('/shops', [ShopController::class, 'index'])->middleware('auth')->name('shops.index');
 
+Route::post('/recipes/{recipe}/execute', [RecipeController::class, 'executeRecipe'])->name('execute_recipe');
+
+
 // Include other necessary route definitions like auth routes
 require __DIR__.'/auth.php';

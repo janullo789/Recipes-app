@@ -21,6 +21,14 @@
                             <h3 class="text-2xl mb-2">{{ __('Description') }}</h3>
                             <p>{{ $recipe->description }}</p>
                         </div>
+
+                        <!-- Przycisk Wykonaj przepis -->
+                        <form method="POST" action="{{ route('execute_recipe', $recipe->id) }}" class="mt-4">
+                            @csrf
+                            <button type="submit" class="btn btn-primary bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded shadow-lg hover:shadow-xl transition duration-300">
+                                {{ __('Wykonaj przepis') }}
+                            </button>
+                        </form>
                     </div>
 
                     <!-- Blok Instrukcji -->
@@ -57,4 +65,9 @@
             </div>
         </div>
     </div>
+    <div id="missing-ingredients" data-ingredients="{{ json_encode(session('missingIngredients')) }}"></div>
+    <div id="recipe-status" data-success="{{ session('success') ? 'true' : 'false' }}" data-used-ingredients="{{ session('usedIngredients') }}"></div>
 </x-app-layout>
+<x-slot name="javaScript">
+    <script src="{{ asset("js/recipes/show.js") }}"></script>
+</x-slot>

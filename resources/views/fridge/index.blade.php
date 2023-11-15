@@ -23,13 +23,15 @@
                                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                                     @foreach ($ingredientsGroup as $ingredient)
                                         <div class="flex flex-col p-2 rounded-lg shadow hover:shadow-md transition ease-in-out duration-150
-                                                {{ isset($user_ingredients[$ingredient->id]) ? 'bg-green-100' : 'bg-white' }}">
+                                                {{ isset($user_ingredients[$ingredient->id]) && $user_ingredients[$ingredient->id]->quantity > 0 ? 'bg-green-100' : 'bg-white' }}">
                                             <p class="text-md font-medium mb-1">{{ $ingredient->name }}<span
                                                     class="text-sm text-gray-500"> [{{ $ingredient->unit }}]</span></p>
-                                            <input type="number"
-                                                   name="quantity[{{ $ingredient->id }}]"
-                                                   value="{{ $user_ingredients[$ingredient->id]->quantity ?? '' }}"
-                                                   class="border rounded p-1 w-full text-sm">
+                                            <label>
+                                                <input type="number"
+                                                       name="quantity[{{ $ingredient->id }}]"
+                                                       value="{{ $user_ingredients[$ingredient->id]->quantity ?? '' }}"
+                                                       class="border rounded p-1 w-full text-sm">
+                                            </label>
                                         </div>
                                     @endforeach
                                 </div>

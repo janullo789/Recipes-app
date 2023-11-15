@@ -6,6 +6,10 @@ use App\Http\Requests\UpsertRecipeRequest;
 use App\Models\Ingredient;
 use App\Models\Recipe;
 use App\Models\RecipeExecution;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +19,7 @@ class RecipeController extends Controller
     /**
      * Display a listing of the resource for admins.
      */
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('recipes.index');
         // in livewire
@@ -24,7 +28,7 @@ class RecipeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function mainSite()
+    public function mainSite(): View
     {
         return view('mainSite');
         // in livewire
@@ -33,7 +37,7 @@ class RecipeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         $ingredients = Ingredient::all();
 
@@ -43,7 +47,7 @@ class RecipeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UpsertRecipeRequest $request)
+    public function store(UpsertRecipeRequest $request): RedirectResponse
     {
         $recipe = new Recipe($request->validated());
         $recipe->image_path = Storage::disk('public')->put('recipes', $request->file('image'));
@@ -64,7 +68,7 @@ class RecipeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recipe $recipe)
+    public function show(Recipe $recipe): View
     {
         $totalCalories = DB::table('recipes_ingredients')
             ->where('recipes_id', $recipe->id)
@@ -80,7 +84,7 @@ class RecipeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Recipe $recipe)
+    public function edit(Recipe $recipe): View
     {
         return view("recipes.edit", [
             'recipe' => $recipe
@@ -90,7 +94,7 @@ class RecipeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Recipe $recipe)
+    public function update(Request $request, Recipe $recipe): RedirectResponse
     {
         $recipe->fill($request->all());
         $recipe->save();
@@ -105,7 +109,7 @@ class RecipeController extends Controller
         // in livewire
     }
 
-    public function executeRecipe(Request $request, $recipeId)
+    public function executeRecipe(Request $request, $recipeId): RedirectResponse
     {
         $recipe = Recipe::with('ingredients')->findOrFail($recipeId);
         $user = auth()->user();

@@ -19,7 +19,7 @@ class RecipeController extends Controller
     /**
      * Display a listing of the resource for admins.
      */
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(): View
     {
         return view('recipes.index');
         // in livewire
@@ -106,6 +106,15 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
+        // in livewire
+    }
+
+    /**
+     * Display a listing of the history of recipes and statistic.
+     */
+    public function history(): View
+    {
+        return view('recipes.history');
         // in livewire
     }
 

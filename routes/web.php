@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/fridge', [FridgeController::class, 'index'])->name('fridge.index');
     Route::post('/fridge', [FridgeController::class, 'store'])->name('fridge.store');
+
+    Route::get('/recipes/history', [RecipeController::class, 'history'])->name('recipes.history');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

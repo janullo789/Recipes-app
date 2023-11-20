@@ -16,10 +16,10 @@ class RecipesHistory extends Component
     public $perPage = 5;
 
     #[Url(history: true)]
-    public $sortBy = 'name';
+    public $sortBy = 'created_at';
 
     #[Url(history: true)]
-    public $sortDir = 'ASC';
+    public $sortDir = 'DESC';
 
     public function setSortBy($sortByField): void
     {

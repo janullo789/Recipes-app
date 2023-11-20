@@ -67,7 +67,7 @@
     </div>
     <div id="missing-ingredients" data-ingredients="{{ json_encode(session('missingIngredients')) }}"></div>
     <div id="recipe-status" data-success="{{ session('success') ? 'true' : 'false' }}" data-used-ingredients="{{ session('usedIngredients') }}"></div>
+    @section('custom_js')
+        @vite(['resources/js/recipes/show.js'])
+    @endsection
 </x-app-layout>
-<x-slot name="javaScript">
-    <script src="{{ asset("js/recipes/show.js") }}"></script>
-</x-slot>

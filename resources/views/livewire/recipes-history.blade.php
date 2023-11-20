@@ -7,10 +7,6 @@
                         <table class="w-full text-left text-sm text-gray-700">
                             <thead class="bg-gray-50 text-base dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-{{--                                @include('livewire.includes.table-sortable-th', [--}}
-{{--                                    'name' => 'name',--}}
-{{--                                    'displayName' => __('Nazwa')--}}
-{{--                                ])--}}
                                 <th scope="col" class="px-4 py-3">
                                     {{ __('Nazwa') }}
                                 </th>

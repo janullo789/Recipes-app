@@ -18,6 +18,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -38,6 +39,6 @@
             </main>
         </div>
         <!-- JS Files -->
-        {{ $javaScript ?? '' }}
+        @yield('custom_js')
     </body>
 </html>

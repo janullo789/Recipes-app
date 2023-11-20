@@ -6,6 +6,7 @@
     </x-slot>
 
     <div>
+        @livewire('user-diet-stats')
         @livewire('recipes-history');
     </div>
 

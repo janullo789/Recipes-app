@@ -129,9 +129,15 @@ class RecipeController extends Controller
             $userIngredient = $userIngredients
                 ->firstWhere('ingredient_id', $ingredient->id);
 
-            if (!$userIngredient || $userIngredient->quantity < $ingredient->pivot->quantity) {
+            if (!$userIngredient) {
                 $missingIngredients[$ingredient->name] = [
-                    'quantity' => $ingredient->pivot->quantity - $userIngredient->quantity,
+                    'quantity' => $ingredient->pivot->quantity,
+                    'unit' => $ingredient->unit
+                ];
+            } elseif ($userIngredient->quantity < $ingredient->pivot->quantity) {
+                $missingQuantity = $ingredient->pivot->quantity - $userIngredient->quantity;
+                $missingIngredients[$ingredient->name] = [
+                    'quantity' => $missingQuantity,
                     'unit' => $ingredient->unit
                 ];
             }

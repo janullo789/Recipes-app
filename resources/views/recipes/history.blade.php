@@ -7,7 +7,7 @@
 
     <div>
         @livewire('user-diet-stats')
-        @livewire('recipes-history');
+{{--        @livewire('recipes-history');--}}
     </div>
 
 </x-app-layout>

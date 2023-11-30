@@ -1,3 +1,5 @@
+import Chart from "chart.js/auto";
+
 let myChart = null
 
 document.addEventListener('livewire:initialized', () => {

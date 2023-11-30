@@ -8,21 +8,8 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopMapController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Uncommented the '/' route to point to the main site
 Route::get('/', [RecipeController::class, 'mainSite'])->name('mainSite');
 
-// Publicly accessible shop map page
 Route::get('/shops/map', [ShopMapController::class, 'index'])->name('shop_map.index');
 
 Route::middleware('auth')->group(function () {
@@ -56,14 +43,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('shops', ShopController::class)->except(['index']);
 });
 
-// Show individual recipe, accessible to everyone
-Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
-
-// Authenticated-only access to the shops index route
 Route::get('/shops', [ShopController::class, 'index'])->middleware('auth')->name('shops.index');
 
 Route::post('/recipes/{recipe}/execute', [RecipeController::class, 'executeRecipe'])->name('execute_recipe');
 
-
-// Include other necessary route definitions like auth routes
 require __DIR__.'/auth.php';

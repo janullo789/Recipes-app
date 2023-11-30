@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Sklepy') }} - {{ __('Edycja sklepu') }}
+            {{ __('Sklepy') }} - {{ __('Edycja') }}
         </h2>
     </x-slot>
 
@@ -74,9 +74,10 @@
                         </div>
 
                         <!-- Map -->
-                        <div id="mapid" class="mb-4 h-96">
-                            <!-- Here you would initialize the map with the shop's coordinates -->
-                        </div>
+                        <div id="mapid" class="h-96 mb-4"
+                             data-map-center-latitude="{{ $shop->latitude }}"
+                             data-map-center-longitude="{{ $shop->longitude }}"
+                             data-zoom-level="{{ config('leaflet.zoom_level') }}"></div>
 
                         <!-- Submit & Cancel -->
                         <div class="my-4 flex items-center justify-between">
@@ -95,42 +96,7 @@
         </div>
     </div>
 
-    <x-slot name="javaScript">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
-                integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-                crossorigin=""></script>
-        <script>
-            var mapCenter = [{{ $shop->latitude }}, {{ $shop->longitude }}];
-            var map = L.map('mapid').setView(mapCenter, {{ config('leaflet.detail_zoom_level') }});
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            var marker = L.marker(mapCenter).addTo(map);
-
-            function updateMarker(lat, lng) {
-                marker
-                    .setLatLng([lat, lng])
-                    .bindPopup("Your location :  " + marker.getLatLng().toString())
-                    .openPopup();
-                return false;
-            };
-
-            map.on('click', function (e) {
-                let latitude = e.latlng.lat.toString().substring(0, 15);
-                let longitude = e.latlng.lng.toString().substring(0, 15);
-                $('#latitude').val(latitude);
-                $('#longitude').val(longitude);
-                updateMarker(latitude, longitude);
-            });
-
-            var updateMarkerByInputs = function () {
-                return updateMarker($('#latitude').val(), $('#longitude').val());
-            }
-            $('#latitude').on('input', updateMarkerByInputs);
-            $('#longitude').on('input', updateMarkerByInputs);
-        </script>
-    </x-slot>
+    @section('custom_js')
+        @vite(['resources/js/shops/form.js'])
+    @endsection
 </x-app-layout>

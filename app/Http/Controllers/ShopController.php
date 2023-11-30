@@ -3,74 +3,109 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ShopController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         $shopQuery = Shop::query();
-        $shopQuery->where('name', 'like', '%'.request('q').'%');
+        $shopQuery->where('name', 'like', '%' . request('q') . '%');
         $shops = $shopQuery->paginate(25);
 
         return view('shops.index', compact('shops'));
     }
 
-    public function create()
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
+    public function create(): View
     {
         $this->authorize('create', new Shop);
 
         return view('shops.create');
     }
 
-    public function store(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function store(Request $request): RedirectResponse
     {
         $this->authorize('create', new Shop);
 
         $newShop = $request->validate([
-            'name'      => 'required|max:120',
-            'category'  => 'nullable|max:60',
-            'address'   => 'nullable|max:255',
-            'latitude'  => 'required|max:15',
+            'name' => 'required|max:120',
+            'category' => 'nullable|max:60',
+            'address' => 'nullable|max:255',
+            'latitude' => 'required|max:15',
             'longitude' => 'required|max:15',
         ]);
         $newShop['creator_id'] = auth()->id();
 
-        $shop = Shop::create($newShop);
+        Shop::create($newShop);
 
-        return redirect()->route('shops.show', $shop);
+        return redirect()->route('shops.index');
     }
 
-    public function show(Shop $shop)
+    /**
+     * @param Shop $shop
+     * @return View
+     */
+    public function show(Shop $shop): View
     {
         return view('shops.show', compact('shop'));
     }
 
-    public function edit(Shop $shop)
+    /**
+     * @param Shop $shop
+     * @return View
+     * @throws AuthorizationException
+     */
+    public function edit(Shop $shop): View
     {
         $this->authorize('update', $shop);
 
         return view('shops.edit', compact('shop'));
     }
 
-    public function update(Request $request, Shop $shop)
+    /**
+     * @param Request $request
+     * @param Shop $shop
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function update(Request $request, Shop $shop): RedirectResponse
     {
         $this->authorize('update', $shop);
 
         $shopData = $request->validate([
-            'name'      => 'required|max:120',
-            'category'  => 'nullable|max:60',
-            'address'   => 'nullable|max:255',
-            'latitude'  => 'required|max:15',
+            'name' => 'required|max:120',
+            'category' => 'nullable|max:60',
+            'address' => 'nullable|max:255',
+            'latitude' => 'required|max:15',
             'longitude' => 'required|max:15',
         ]);
         $shop->update($shopData);
 
-        return redirect()->route('shops.show', $shop);
+        return redirect()->route('shops.index');
     }
 
-
-    public function destroy(Request $request, Shop $shop)
+    /**
+     * @param Request $request
+     * @param Shop $shop
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function destroy(Request $request, Shop $shop): RedirectResponse
     {
         $this->authorize('delete', $shop);
 

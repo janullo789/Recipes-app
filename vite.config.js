@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/recipes/show.js',
+                'resources/js/recipes/history.js',
             ],
             refresh: true,
         }),

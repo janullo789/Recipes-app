@@ -7,7 +7,10 @@
 
     <div>
         @livewire('user-diet-stats')
-{{--        @livewire('recipes-history');--}}
     </div>
+
+    @section('custom_js')
+        @vite(['resources/js/recipes/history.js'])
+    @endsection
 
 </x-app-layout>

@@ -15,12 +15,17 @@
         </div>
     </div>
 
-    <x-slot name="javaScript">
+    @section('custom_js')
+{{--        @vite(['resources/js/recipes/show.js'])--}}
+
+
+{{--    <x-slot name="javaScript">--}}
                 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
                 <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
                         integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
                         crossorigin=""></script>
                 <script>
+                    console.log()
                     var map = L.map('mapid').setView([{{ config('leaflet.map_center_latitude') }}, {{ config('leaflet.map_center_longitude') }}], {{ config('leaflet.zoom_level') }});
                     var baseUrl = "{{ url('/') }}";
 
@@ -66,5 +71,6 @@
                         });
                     @endcan
                 </script>
-    </x-slot>
+    @endsection
+{{--    </x-slot>--}}
 </x-app-layout>

@@ -20,14 +20,20 @@ class Shop extends Model
         'longitude',
     ];
 
-    public function getCoordinateAttribute()
+    /**
+     * @return string|null
+     */
+    public function getCoordinateAttribute(): ?string
     {
         return $this->latitude && $this->longitude
-            ? "{$this->latitude}, {$this->longitude}"
+            ? "$this->latitude, $this->longitude"
             : null;
     }
 
-    public function getNameLinkAttribute()
+    /**
+     * @return string
+     */
+    public function getNameLinkAttribute(): string
     {
         $title = __('app.show_detail_title', [
             'name' => $this->name,
@@ -42,7 +48,10 @@ class Shop extends Model
         );
     }
 
-    public function getMapPopupContentAttribute()
+    /**
+     * @return string
+     */
+    public function getMapPopupContentAttribute(): string
     {
         return sprintf(
             '<div class="my-2"><strong>%s:</strong><br>%s</div><div class="my-2"><strong>%s:</strong><br>%s</div>',
@@ -58,10 +67,10 @@ class Shop extends Model
      * @param $value
      * @return void
      */
-    public function scopeSearch($query, $value)
+    public function scopeSearch($query, $value): void
     {
-        $query->where('id', 'like', "%{$value}%")
-            ->orWhere('name', 'like', "%{$value}%")
-            ->orWhere('address', 'like', "%{$value}%");
+        $query->where('id', 'like', "%$value%")
+            ->orWhere('name', 'like', "%$value%")
+            ->orWhere('address', 'like', "%$value%");
     }
 }

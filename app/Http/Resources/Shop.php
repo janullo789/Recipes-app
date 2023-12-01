@@ -6,7 +6,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class Shop extends JsonResource
 {
-    public function toArray($request)
+    /**
+     * @param $request
+     * @return array
+     */
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,
@@ -14,9 +18,9 @@ class Shop extends JsonResource
             'category' => $this->category,
             'address' => $this->address,
 
-            'map_popup_content' => "<b>Nazwa:</b> {$this->name}<br>"
-                . (!empty($this->address) ? "<b>Adres:</b> {$this->address}<br>" : "")
-                . (!empty($this->category) ? "<b>Kategoria:</b> {$this->category}<br>" : "")
+            'map_popup_content' => "<b>Nazwa:</b> $this->name<br>"
+                . (!empty($this->address) ? "<b>Adres:</b> $this->address<br>" : "")
+                . (!empty($this->category) ? "<b>Kategoria:</b> $this->category<br>" : "")
 
         ];
     }

@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\Ingredient\IngredientCategory;
-use App\Enums\Ingredient\IngredientUnit;
 use App\Enums\Recipe\RecipeDiet;
 use App\Enums\Recipe\RecipeTime;
 use Illuminate\Foundation\Http\FormRequest;

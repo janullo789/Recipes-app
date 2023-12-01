@@ -10,25 +10,45 @@ class ShopPolicy
 {
     use HandlesAuthorization;
 
-    public function view(User $user, Shop $shop)
+    /**
+     * @param User $user
+     * @param Shop $shop
+     * @return bool
+     */
+    public function view(User $user, Shop $shop): bool
     {
         // Update $user authorization to view $shop here.
         return true;
     }
 
-    public function create(User $user, Shop $shop)
+    /**
+     * @param User $user
+     * @param Shop $shop
+     * @return bool
+     */
+    public function create(User $user, Shop $shop): bool
     {
         // Update $user authorization to create $shop here.
         return true;
     }
 
-    public function update(User $user, Shop $shop)
+    /**
+     * @param User $user
+     * @param Shop $shop
+     * @return bool
+     */
+    public function update(User $user, Shop $shop): bool
     {
         // Update $user authorization to update $shop here.
         return true;
     }
 
-    public function delete(User $user, Shop $shop)
+    /**
+     * @param User $user
+     * @param Shop $shop
+     * @return bool
+     */
+    public function delete(User $user, Shop $shop): bool
     {
         // Update $user authorization to delete $shop here.
         return true;

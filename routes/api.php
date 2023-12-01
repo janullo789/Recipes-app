@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\ShopController;
-use App\Http\Controllers\ShopMapController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

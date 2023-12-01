@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/fridge', [FridgeController::class, 'store'])->name('fridge.store');
 
     Route::get('/recipes/history', [RecipeController::class, 'history'])->name('recipes.history');
+    Route::post('/recipes/{recipe}/execute', [RecipeController::class, 'executeRecipe'])->name('execute_recipe');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -43,8 +44,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('shops', ShopController::class)->except(['index']);
 });
 
-Route::get('/shops', [ShopController::class, 'index'])->middleware('auth')->name('shops.index');
+Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
-Route::post('/recipes/{recipe}/execute', [RecipeController::class, 'executeRecipe'])->name('execute_recipe');
+Route::get('/shops', [ShopController::class, 'index'])->middleware('auth')->name('shops.index');
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Shop;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -25,7 +26,11 @@ class ShopsTable extends Component
     #[Url(history: true)]
     public $sortDir = 'ASC';
 
-    public function setSortBy($sortByField)
+    /**
+     * @param $sortByField
+     * @return void
+     */
+    public function setSortBy($sortByField): void
     {
         if($this->sortBy === $sortByField) {
             $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC";
@@ -35,12 +40,19 @@ class ShopsTable extends Component
         $this->sortDir = 'DESC';
     }
 
-    public function delete(Shop $shop)
+    /**
+     * @param Shop $shop
+     * @return void
+     */
+    public function delete(Shop $shop): void
     {
         $shop->delete();
     }
 
-    public function render()
+    /**
+     * @return View
+     */
+    public function render(): View
     {
         return view('livewire.shops-table', [
             'shops' => Shop::search($this->search)

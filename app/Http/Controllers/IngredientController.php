@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpsertIngredientRequest;
 use App\Models\Ingredient;
 use Exception;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +15,7 @@ class IngredientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): View|Application|Factory|JsonResponse
+    public function index(): View
     {
         return view('ingredients.index');
         // in livewire
@@ -26,7 +24,7 @@ class IngredientController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('ingredients.create');
     }
@@ -34,7 +32,7 @@ class IngredientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UpsertIngredientRequest $request)//: RedirectResponse
+    public function store(UpsertIngredientRequest $request): RedirectResponse
     {
         $ingredient = new Ingredient($request->validated());
         $ingredient->save();
@@ -42,19 +40,11 @@ class IngredientController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Ingredient $ingredient)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      * @param Ingredient $ingredient
-     * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
+     * @return View
      */
-    public function edit(Ingredient $ingredient)
+    public function edit(Ingredient $ingredient): View
     {
         return view("ingredients.edit", [
             'ingredient' => $ingredient

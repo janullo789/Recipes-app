@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Recipe;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -28,7 +29,11 @@ class RecipesTable extends Component
     #[Url(history: true)]
     public $sortDir = 'ASC';
 
-    public function setSortBy($sortByField)
+    /**
+     * @param $sortByField
+     * @return void
+     */
+    public function setSortBy($sortByField): void
     {
         if($this->sortBy === $sortByField) {
             $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC";
@@ -54,7 +59,10 @@ class RecipesTable extends Component
         }
     }
 
-    public function render()
+    /**
+     * @return View
+     */
+    public function render(): View
     {
         return view('livewire.recipes-table', [
             'recipes' => Recipe::with('ingredients')

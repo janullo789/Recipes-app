@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Recipes') }} - {{ __('Create') }}
+            {{ __('Przepisy') }} - {{ __('Tworzenie') }}
         </h2>
     </x-slot>
 
@@ -14,8 +14,8 @@
 
                     <!-- Name -->
                     <div class="my-4">
-                        <x-input-label for="name" :value="__('Name')"/>
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" maxlength="100" name="name"
+                        <x-input-label for="name" :value="__('Nazwa')"/>
+                        <x-text-input id="name" class="mt-1 block w-full" type="text" maxlength="100" name="name"
                                       :value="old('name')"
                                       required autofocus autocomplete="name"/>
                         <x-input-error :messages="$errors->get('name')" class="mt-2"/>
@@ -23,27 +23,25 @@
 
                     <!-- Description -->
                     <div class="my-4">
-                        <x-input-label for="description" :value="__('Description')"/>
-                        <x-text-input id="description" class="block mt-1 w-full" type="text" name="description"
-                                      :value="old('description')"
-                                      required autofocus autocomplete="description"/>
+                        <x-input-label for="description" :value="__('Opis')"/>
+                        <x-textarea id="description" name="description" required
+                                    autofocus>{{ old('description') }}</x-textarea>
                         <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                     </div>
 
                     <!-- Instruction -->
                     <div class="my-4">
-                        <x-input-label for="instruction" :value="__('Instruction')"/>
-                        <x-text-input id="instruction" class="block mt-1 w-full" type="text" name="instruction"
-                                      :value="old('instruction')"
-                                      required autofocus autocomplete="instruction"/>
+                        <x-input-label for="instruction" :value="__('Instrukcja')"/>
+                        <x-textarea id="instruction" name="instruction" required
+                                    autofocus>{{ old('instruction') }}</x-textarea>
                         <x-input-error :messages="$errors->get('instruction')" class="mt-2"/>
                     </div>
 
                     <!-- Diet -->
                     <div class="my-4">
-                        <x-input-label for="diet" :value="__('Diet')"/>
+                        <x-input-label for="diet" :value="__('Dieta')"/>
                         <select id="diet" name="diet"
-                                class="bg-gray-50 shadow-sm border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="my-1 block w-full rounded-md border border-gray-300 bg-gray-50 text-gray-900 shadow-sm p-2.5 focus:border-gray-500 focus:ring-gray-500 dark:placeholder-gray-400 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-blue-500 dark:focus:ring-blue-500">
                             <option value="" selected>-</option>
                             @foreach(RecipeDiet::TYPES as $diet)
                                 <option value="{{ $diet }}">{{ $diet }}</option>
@@ -54,9 +52,9 @@
 
                     <!-- Time -->
                     <div class="my-4">
-                        <x-input-label for="time" :value="__('Time')"/>
+                        <x-input-label for="time" :value="__('Czas')"/>
                         <select id="time" name="time"
-                                class="bg-gray-50 border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="my-1 block w-full rounded-md border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:border-gray-500 focus:ring-gray-500 dark:placeholder-gray-400 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-blue-500 dark:focus:ring-blue-500">
                             <option value="" selected>-</option>
                             @foreach(RecipeTime::TYPES as $time)
                                 <option value="{{ $time }}">{{ $time }}</option>
@@ -67,20 +65,20 @@
 
                     <!-- Ingredients -->
                     <div class="my-4">
-                        <x-input-label for="ingredients" :value="__('Ingredients')"/>
+                        <x-input-label for="ingredients" :value="__('Składniki')"/>
                         @foreach($ingredients->groupBy('category') as $category => $categoryIngredients)
                             <div class="mb-2 text-center">
                                 <h2 class="pt-4 text-lg font-semibold">{{ Str::upper($category) }}</h2>
                                 <div class="grid grid-cols-2 gap-4">
                                     @foreach($categoryIngredients as $ingredient)
-                                        <div class="flex items-center text-left mt-1">
+                                        <div class="mt-1 flex items-center text-left">
                                             <label for="ingredient-{{ $ingredient->id }}"
-                                                   class="inline-flex items-center mt-1">{{ $ingredient->name }}</label>
+                                                   class="mt-1 inline-flex items-center">{{ $ingredient->name }}</label>
                                             <input type="number" name="ingredients[{{ $ingredient->id }}][id]"
                                                    value="{{ $ingredient->id }}" hidden>
                                             <input type="number" name="ingredients[{{ $ingredient->id }}][quantity]"
                                                    min="0" step="1" value=0
-                                                   class="w-1/3 ml-2 px-2 py-1 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500">
+                                                   class="ml-2 w-1/3 rounded-md border border-gray-300 px-2 py-1 focus:border-gray-500 focus:ring-gray-500">
                                             <span class="ml-1 text-sm text-gray-500">[{{ $ingredient->unit }}]</span>
                                         </div>
                                     @endforeach
@@ -92,26 +90,25 @@
 
                     <!-- Image -->
                     <div class="my-4">
-                        <x-input-label for="image" :value="__('Image')"/>
-                        <input id="image" class="block mt-1 w-full" type="file" name="image"
-                                      :value="old('image')"
-                                      autofocus/>
+                        <x-input-label for="image" :value="__('Obraz')"/>
+                        <input id="image" class="mt-1 block w-full" type="file" name="image"
+                               :value="old('image')"
+                               autofocus/>
                         <x-input-error :messages="$errors->get('image')" class="mt-2"/>
                     </div>
 
-                    <div class="flex items-center justify-between my-4">
+                    <div class="my-4 flex items-center justify-between">
                         <a href="{{ route('recipes.index') }}">
                             <x-back-button>
-                                {{ __('Back') }}
+                                {{ __('Wróć') }}
                             </x-back-button>
                         </a>
                         <x-primary-button>
-                            {{ __('Create') }}
+                            {{ __('Zapisz') }}
                         </x-primary-button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </x-app-layout>

@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use App\Enums\Ingredient\IngredientCategory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Ingredient extends Model
@@ -42,8 +41,8 @@ class Ingredient extends Model
      * @param $value
      * @return void
      */
-    public function scopeSearch($query, $value)
+    public function scopeSearch($query, $value): void
     {
-        $query->where('id', 'like', "%{$value}%")->orWhere('name', 'like', "%{$value}%");
+        $query->where('id', 'like', "%$value%")->orWhere('name', 'like', "%$value%");
     }
 }

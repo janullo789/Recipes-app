@@ -23,12 +23,14 @@
                         </div>
 
                         <!-- Przycisk Wykonaj przepis -->
-                        <form method="POST" action="{{ route('execute_recipe', $recipe->id) }}" class="mt-4">
-                            @csrf
-                            <button type="submit" class="btn btn-primary bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded shadow-lg hover:shadow-xl transition duration-300">
-                                {{ __('Wykonaj przepis') }}
-                            </button>
-                        </form>
+                        @auth
+                            <form method="POST" action="{{ route('execute_recipe', $recipe->id) }}" class="mt-4">
+                                @csrf
+                                <button type="submit" class="btn btn-primary bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded shadow-lg hover:shadow-xl transition duration-300">
+                                    {{ __('Wykonaj przepis') }}
+                                </button>
+                            </form>
+                        @endauth
                     </div>
 
                     <!-- Blok Instrukcji -->

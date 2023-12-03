@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use App\Models\Recipe;
@@ -21,16 +22,17 @@ class RecipesList extends Component
 
     public $showOnlyAvailable = false;
 
-    public function render()
+    /**
+     * @return View
+     */
+    public function render(): View
     {
-        // Pobierz ID składników i ich ilość dla zalogowanego użytkownika
         $userIngredients = UserIngredient::where('user_id', Auth::id())
             ->select('ingredient_id', 'quantity')
             ->get()
             ->keyBy('ingredient_id')
             ->toArray();
 
-        // Pobierz wszystkie przepisy
         $allRecipes = Recipe::with('ingredients')
             ->search($this->search)
             ->when($this->diet !== '', function($query){
@@ -49,7 +51,6 @@ class RecipesList extends Component
                 $requiredQuantity = $ingredient->pivot->quantity;
                 $availableQuantity = $userIngredients[$ingredient->id]['quantity'] ?? 0;
 
-                // Sprawdź czy użytkownik ma składnik oraz czy ilość jest wystarczająca
                 if (!array_key_exists($ingredient->id, $userIngredients) || $availableQuantity < $requiredQuantity) {
                     $isAvailable = false;
                     break;
@@ -67,7 +68,10 @@ class RecipesList extends Component
     }
 
 
-    public function toggleShowOnlyAvailable()
+    /**
+     * @return void
+     */
+    public function toggleShowOnlyAvailable(): void
     {
         $this->showOnlyAvailable = !$this->showOnlyAvailable;
     }

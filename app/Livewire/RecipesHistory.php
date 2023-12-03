@@ -3,24 +3,70 @@
 namespace App\Livewire;
 
 use App\Models\RecipeExecution;
-use Exception;
-use Illuminate\Contracts\View\View;
-use Livewire\Attributes\Url;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Exception;
+use Illuminate\Contracts\View\View;
 
 class RecipesHistory extends Component
 {
     use WithPagination;
 
+    public $calorieData;
     public $perPage = 5;
-
-    #[Url(history: true)]
     public $sortBy = 'created_at';
-
-    #[Url(history: true)]
     public $sortDir = 'DESC';
+    public $selectedWeek = null;
 
+    /**
+     * @return void
+     */
+    public function mount(): void
+    {
+        $this->calorieData = $this->getCalorieDataForRecentWeeks();
+    }
+
+    /**
+     * @return array
+     */
+    private function getCalorieDataForRecentWeeks(): array
+    {
+        $currentWeek = Carbon::now()->weekOfYear;
+        $year = date('Y');
+        $caloriesPerWeek = [];
+        $dateLabels = [];
+
+        for ($week = $currentWeek; $week > $currentWeek - 10; $week--) {
+            $weekOfYear = $week > 0 ? $week : 52 + $week;
+            $startDate = Carbon::now()->setISODate($year, $weekOfYear)->startOfWeek();
+            $endDate = Carbon::now()->setISODate($year, $weekOfYear)->endOfWeek();
+
+            $weeklyCalories = RecipeExecution::where('user_id', auth()->id())
+                ->whereBetween('created_at', [$startDate, $endDate])
+                ->with('recipe.ingredients')
+                ->get()
+                ->sum(function ($execution) {
+                    return $execution->recipe->ingredients->sum(function ($ingredient) {
+                        return $ingredient->calories * $ingredient->pivot->quantity;
+                    });
+                });
+
+            $caloriesPerWeek[$week] = $weeklyCalories;
+            $dateLabels[$weekOfYear] = $startDate->format('d.m') . ' - ' . $endDate->format('d.m.Y');
+        }
+
+        return [
+            'calories' => array_reverse($caloriesPerWeek),
+            'labels' => array_reverse($dateLabels),
+        ];
+    }
+
+    /**
+     * @param $sortByField
+     * @return void
+     */
     public function setSortBy($sortByField): void
     {
         if($this->sortBy === $sortByField) {
@@ -31,6 +77,10 @@ class RecipesHistory extends Component
         $this->sortDir = 'DESC';
     }
 
+    /**
+     * @param RecipeExecution $execution
+     * @return JsonResponse
+     */
     public function delete(RecipeExecution $execution)
     {
         try {
@@ -46,13 +96,31 @@ class RecipesHistory extends Component
         }
     }
 
+    /**
+     * @return View
+     */
     public function render(): View
     {
+        $this->dispatch('chartUpdate');
+
+        $query = RecipeExecution::with('recipe')->orderBy($this->sortBy, $this->sortDir);
+
+        if ($this->selectedWeek) {
+            [$weekStart, $weekEnd] = explode(' - ', $this->selectedWeek);
+            [$dayStart, $monthStart] = explode('.', $weekStart);
+            [$dayEnd, $monthEnd, $year] = explode('.', $weekEnd);
+
+            $weekStart = "$year.$monthStart.$dayStart 00:00:00";
+            $weekEnd = "$year.$monthEnd.$dayEnd 23:59:59";
+
+
+            $query->whereDate('created_at', '<=', $weekEnd)
+                ->whereDate('created_at', '>=', $weekStart);
+        }
+
         return view('livewire.recipes-history', [
-            'userRecipes' => RecipeExecution::with('recipe')
-                ->with('recipe')
-                ->orderBy($this->sortBy, $this->sortDir)
-                ->paginate($this->perPage)
+            'calorieData' => $this->calorieData,
+            'userRecipes' => $query->paginate($this->perPage)
         ]);
     }
 }

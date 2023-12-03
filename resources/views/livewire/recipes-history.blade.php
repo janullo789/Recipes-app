@@ -4,6 +4,20 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="flex items-start p-6 text-xl">
                     <div class="flex-1">
+                        <canvas id="calorieChart" class="w-full max-h-96"
+                                data-calories="{{ json_encode($calorieData['calories']) }}"
+                                data-labels="{{ json_encode($calorieData['labels']) }}"></canvas>
+                        <input wire:model.live="selectedWeek" id="selectedWeek" value=1 type="hidden">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-6">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div class="flex items-start p-6 text-xl">
+                    <div class="flex-1">
                         <table class="w-full text-left text-sm text-gray-700">
                             <thead class="bg-gray-50 text-base dark:bg-gray-700 dark:text-gray-400">
                             <tr>

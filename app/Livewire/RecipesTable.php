@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Recipe;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -46,6 +47,8 @@ class RecipesTable extends Component
     public function delete(Recipe $recipe)
     {
         try {
+            Storage::delete('public/recipes/' . $recipe->image_path);
+
             $recipe->ingredients()->detach();
             $recipe->delete();
             return response()->json([

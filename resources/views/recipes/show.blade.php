@@ -7,22 +7,22 @@
 
     <div class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Główny Kontener -->
+            <!-- Main Container -->
             <div class="bg-white overflow-hidden shadow-xl rounded-xl p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Blok Zdjęcia -->
+                    <!-- Photo -->
                     <div class="col-span-1 lg:col-span-2">
                         <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="{{ $recipe->name }}" class="w-full h-64 object-cover rounded-lg shadow-lg mb-6">
                     </div>
 
-                    <!-- Blok Opisu -->
+                    <!-- Description -->
                     <div class="col-span-1">
                         <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
                             <h3 class="text-2xl mb-2">{{ __('Description') }}</h3>
                             <p>{{ $recipe->description }}</p>
                         </div>
 
-                        <!-- Przycisk Wykonaj przepis -->
+                        <!-- Button execution -->
                         @auth
                             <form method="POST" action="{{ route('execute_recipe', $recipe->id) }}" class="mt-4">
                                 @csrf
@@ -33,7 +33,7 @@
                         @endauth
                     </div>
 
-                    <!-- Blok Instrukcji -->
+                    <!-- Instruction -->
                     <div class="col-span-1">
                         <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
                             <h3 class="text-2xl mb-2">{{ __('Ingredient') }}:</h3>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <!-- Blok Dodatkowych Informacji -->
+                    <!-- Additionally description -->
                     <div class="col-span-1 lg:col-span-2">
                         <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
                             @if (!empty($recipe->diet))
@@ -56,7 +56,7 @@
                         </div>
                     </div>
 
-                    <!-- Blok Składników -->
+                    <!-- Ingredients -->
                     <div class="col-span-1 lg:col-span-3">
                         <div class="bg-gray-100 p-4 rounded-lg shadow-lg whitespace-pre-line">
                             <h3 class="text-2xl mb-2">{{ __('Instruction') }}</h3>

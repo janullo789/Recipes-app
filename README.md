@@ -1,66 +1,92 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Diet Managment Aplication - thesis
 
-## About Laravel
+The thesis centers on creating a diet management application that integrates advanced technology with the practical requirements of users. Its purpose is to make recipe discovery easier, manage household food stocks effectively, and aid users in making knowledgeable dietary choices. Key features include recipe searches using available ingredients to minimize food wastage and aid in daily meal organization. The app was developed using web-based technology, ensuring easy access, update, and maintenance. The document delves into the technological choices made and the detailed process of developing the app. It thoroughly examines crucial technical elements like optimizing database queries and enhancing app performance. The user interface is designed for simplicity and ease, ensuring fluid navigation. Additionally, the paper proposes ideas for the app's future enhancement.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- management of the diet based on the food products owned by the user
+- efficient use of food stocks
+- location of grocery shops
+- monitoring diet status
+- optimisation of database queries
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Screenshots
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Main page
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/28ea801f-f403-438a-b90a-1bf3fd74f365)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Recipe page
 
-## Laravel Sponsors
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/fdfac593-23b2-4044-917f-4b4f7808adff)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- User's ingredients page
 
-### Premium Partners
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/a78f5ff8-2569-47c0-921e-ed7c47cde68b)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Maps of shops
 
-## Contributing
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/e8a85fed-0d18-4676-a459-eeb5495b5173)
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/669f740c-0fc1-4089-b154-57fb40d2e743)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Statistic
 
-## Code of Conduct
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/d32aad7c-fcf0-4ec1-a30d-d6fcfc706d7a)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Login/SignUp
 
-## Security Vulnerabilities
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/7bec8aed-6849-4356-ab82-29a55729661c)
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/1d26efae-def5-4d68-84d3-5814eec23f90)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Account settings
 
-## License
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/1303dea7-13eb-4d67-bae0-9c386f1d09be)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Adminstration's page
+  
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/a0278623-22bc-423b-b1c4-469cee2815e5)
+![image](https://github.com/janullo789/Recipes-app/assets/100961127/ff0e0769-1c43-4fbf-bc8c-835e7289da23)
+
+
+## Tech Stack
+
+- **PHP** 8.1
+- **Laravel** 10
+- **Livewire** 3
+- **MySQL** 5.7
+- Library
+     - **Leaflet** 1.9.4
+     - **SweetAlert2** 11.6.13
+     - **Chart.js** 4.4.0
+
+The program was written in accordance with the assumptions of object-oriented programming and MVC model.
+
+
+
+
+## Installation
+
+1. Clone the repository:
+```
+git clone https://github.com/janullo789/Recipes-app.git
+```
+2. Go to the new folder:
+```
+cd recipes-app
+```
+3. Build and Run the Docker Containers
+```
+docker-compose up -d
+```
+4. Install Composer Dependencies
+```
+docker-compose exec app composer install
+```
+5. Run Database Migrations (Optional)
+```
+docker-compose exec app php artisan migrate
+```
+5. Accessing the Application
+The application should now be up and running on your local machine. By default, you can access it at http://localhost:8000.

@@ -17,13 +17,22 @@
                     </x-nav-link>
                 </div>
                 @auth
-                    <!-- Dyrektywa sprawdzająca, czy użytkownik jest zalogowany -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('fridge.index')" :active="request()->routeIs('fridge.index')">
                             {{ __('Twoja lodówka') }}
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('recipes.history')" :active="request()->routeIs('recipes.history')">
+                            {{ __('Historia') }}
+                        </x-nav-link>
+                    </div>
                 @endauth
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('shop_map.index')" :active="request()->routeIs('shop_map.index')">
+                        {{ __('Mapa sklepów') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -66,8 +75,21 @@
                     <x-slot name="content">
                         @auth
                             <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
+                                {{ __('Profil') }}
                             </x-dropdown-link>
+
+                            @can('isAdmin', auth()->user())
+                                <div class="bg-gray-200 p-2 text-center uppercase">{{ __('Zarządzanie') }}</div>
+                                <x-dropdown-link :href="route('ingredients.index')" class="bg-gray-200">
+                                    {{ __('Składniki') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('recipes.index')" class="bg-gray-200">
+                                    {{ __('Przepisy') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('shops.index')" class="bg-gray-200">
+                                    {{ __('Sklepy') }}
+                                </x-dropdown-link>
+                            @endcan
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
@@ -76,13 +98,13 @@
                                 <x-dropdown-link :href="route('logout')"
                                                  onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Wyloguj') }}
                                 </x-dropdown-link>
                             </form>
                         @endauth
 
                         @guest
-                            <!-- Linki dla niezalogowanych użytkowników -->
+                            <!-- Links for not logged users -->
                             <x-dropdown-link :href="route('login')">
                                 {{ __('Logowanie') }}
                             </x-dropdown-link>
@@ -118,16 +140,27 @@
                 {{ __('Przepisy') }}
             </x-responsive-nav-link>
         </div>
+        @auth
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('fridge.index')" :active="request()->routeIs('fridge.index')">
+                    {{ __('Twoja lodówka') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('recipes.history')" :active="request()->routeIs('recipes.history')">
+                    {{ __('Historia') }}
+                </x-responsive-nav-link>
+            </div>
+        @endauth
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('fridge.index')" :active="request()->routeIs('fridge.index')">
-                {{ __('Twoja lodówka') }}
+            <x-responsive-nav-link :href="route('shop_map.index')" :active="request()->routeIs('shop_map.index')">
+                {{ __('Mapa sklepów') }}
             </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             @auth
-                <!-- Dodajemy tę dyrektywę tutaj -->
                 <div class="px-4">
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
@@ -135,8 +168,22 @@
 
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
+                        {{ __('Profil') }}
                     </x-responsive-nav-link>
+
+                    @can('isAdmin', auth()->user())
+                        <div class="bg-gray-200 p-2 text-center uppercase">{{ __('Zarządzanie') }}</div>
+                        <x-responsive-nav-link :href="route('ingredients.index')" class="bg-gray-200">
+                            {{ __('Składniki') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('recipes.index')" class="bg-gray-200">
+                            {{ __('Przepisy') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('shops.index')" class="bg-gray-200">
+                            {{ __('Sklepy') }}
+                        </x-responsive-nav-link>
+                    @endcan
+
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
@@ -145,14 +192,14 @@
                         <x-responsive-nav-link :href="route('logout')"
                                                onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                            {{ __('Wyloguj') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>
-            @endauth  <!-- Koniec dyrektywy -->
+            @endauth
 
             @guest
-                <!-- Dla gości -->
+                <!-- Links for not logged users -->
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('login')">
                         {{ __('Logowanie') }}

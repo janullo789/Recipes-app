@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Recipe;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +13,7 @@ class RecipesTable extends Component
 {
     use WithPagination;
 
-    public $perPage = 5;
+    public $perPage = 10;
 
     #[Url(history: true)]
     public $search = '';
@@ -28,7 +30,11 @@ class RecipesTable extends Component
     #[Url(history: true)]
     public $sortDir = 'ASC';
 
-    public function setSortBy($sortByField)
+    /**
+     * @param $sortByField
+     * @return void
+     */
+    public function setSortBy($sortByField): void
     {
         if($this->sortBy === $sortByField) {
             $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC";
@@ -41,6 +47,8 @@ class RecipesTable extends Component
     public function delete(Recipe $recipe)
     {
         try {
+            Storage::delete('public/recipes/' . $recipe->image_path);
+
             $recipe->ingredients()->detach();
             $recipe->delete();
             return response()->json([
@@ -54,7 +62,10 @@ class RecipesTable extends Component
         }
     }
 
-    public function render()
+    /**
+     * @return View
+     */
+    public function render(): View
     {
         return view('livewire.recipes-table', [
             'recipes' => Recipe::with('ingredients')

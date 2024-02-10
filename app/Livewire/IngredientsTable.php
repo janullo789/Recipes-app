@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Ingredient;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -25,7 +26,11 @@ class IngredientsTable extends Component
     #[Url(history: true)]
     public $sortDir = 'ASC';
 
-    public function setSortBy($sortByField)
+    /**
+     * @param $sortByField
+     * @return void
+     */
+    public function setSortBy($sortByField): void
     {
         if($this->sortBy === $sortByField) {
             $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC";
@@ -35,12 +40,16 @@ class IngredientsTable extends Component
         $this->sortDir = 'DESC';
     }
 
-    public function delete(Ingredient $ingredient)
+    /**
+     * @param Ingredient $ingredient
+     * @return void
+     */
+    public function delete(Ingredient $ingredient): void
     {
         $ingredient->delete();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.ingredients-table', [
             'categories' => Ingredient::distinct('category')->pluck('category'),

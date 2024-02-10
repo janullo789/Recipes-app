@@ -12,6 +12,10 @@ export default {
 
     theme: {
         extend: {
+            height: {
+                '128': '32rem', // 512px
+                '144': '36rem', // 576px
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },

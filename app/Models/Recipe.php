@@ -9,6 +9,9 @@ class Recipe extends Model
 {
     use HasFactory;
 
+    /**
+     * @var bool|mixed
+     */
     protected $fillable = [
         'name',
         'description',

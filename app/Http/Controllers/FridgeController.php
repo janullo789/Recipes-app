@@ -2,30 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UpsertFridgeRequest;
 use App\Models\Ingredient;
 use App\Models\UserIngredient;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 
 class FridgeController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
-        $ingredients = Ingredient::all()->groupBy('category');
         $user_id = auth()->id();
+
+        $ingredients = Cache::remember("user_{$user_id}_ingredients",60, function () {
+            return Ingredient::all()->groupBy('category');
+        });
+        $ingredients = Ingredient::all()->groupBy('category');
+
         $user_ingredients = UserIngredient::where('user_id', $user_id)->get()->keyBy('ingredient_id');
 
         return view('fridge.index', compact('ingredients', 'user_ingredients'));
     }
 
-
-    public function store(Request $request)
+    /**
+     * @param UpsertFridgeRequest $request
+     * @return RedirectResponse
+     */
+    public function store(UpsertFridgeRequest $request): RedirectResponse
     {
-        $data = $request->all();
+        $data = $request->validated();
         $user_id = auth()->id();
 
         UserIngredient::where('user_id', $user_id)->delete();
 
-        // Następnie dodaj tylko te, które mają wartość większą od 0
+        // Adding only values >0
         foreach ($data['quantity'] as $ingredient_id => $quantity) {
             if ($quantity !== null && $quantity > 0) {
                 UserIngredient::create([
@@ -38,6 +52,4 @@ class FridgeController extends Controller
 
         return redirect()->route('fridge.index');
     }
-
-
 }

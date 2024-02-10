@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Recipes') }} - {{ __('Edit') }}
+            {{ __('Przepisy') }} - {{ __('Edycja') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
 
                     <!-- Name -->
                     <div class="my-4">
-                        <x-input-label for="name" :value="__('Name')"/>
+                        <x-input-label for="name" :value="__('Nazwa')"/>
                         <x-text-input id="name" class="block mt-1 w-full" type="text" maxlength="100" name="name" :value="old('name', $recipe->name)"
                                       required autofocus autocomplete="name"/>
                         <x-input-error :messages="$errors->get('name')" class="mt-2"/>
@@ -22,7 +22,7 @@
 
                     <!-- Description -->
                     <div class="my-4">
-                        <x-input-label for="description" :value="__('Description')"/>
+                        <x-input-label for="description" :value="__('Opis')"/>
                         <x-text-input id="description" class="block mt-1 w-full" type="text" name="description"
                                       :value="old('description', $recipe->description)"
                                       required autofocus autocomplete="description"/>
@@ -31,7 +31,7 @@
 
                     <!-- Instruction -->
                     <div class="my-4">
-                        <x-input-label for="instruction" :value="__('Instruction')"/>
+                        <x-input-label for="instruction" :value="__('Instrukcja')"/>
                         <x-text-input id="instruction" class="block mt-1 w-full" type="text" name="instruction"
                                       :value="old('instruction', $recipe->instruction)"
                                       required autofocus autocomplete="instruction"/>
@@ -40,7 +40,7 @@
 
                     <!-- Diet -->
                     <div class="my-4">
-                        <x-input-label for="diet" :value="__('Diet')"/>
+                        <x-input-label for="diet" :value="__('Dieta')"/>
                         <select id="diet" name="diet"
                                 class="bg-gray-50 shadow-sm border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="{{ $recipe->diet ? : null }}" selected>{{ $recipe->diet ? : '-' }}</option>
@@ -54,7 +54,7 @@
 
                     <!-- Time -->
                     <div class="my-4">
-                        <x-input-label for="time" :value="__('Time')"/>
+                        <x-input-label for="time" :value="__('Czas')"/>
                         <select id="time" name="time"
                                 class="bg-gray-50 border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="{{ $recipe->time ? : null}}" selected>{{ $recipe->time ? : '-'}}</option>
@@ -69,11 +69,11 @@
                     <div class="flex items-center justify-between my-4">
                        <a href="{{ route('recipes.index') }}">
                             <x-back-button>
-                                {{ __('Back') }}
+                                {{ __('Wróć') }}
                             </x-back-button>
                         </a>
                         <x-primary-button>
-                            {{ __('Save') }}
+                            {{ __('Zapisz') }}
                         </x-primary-button>
                     </div>
                 </form>

@@ -7,8 +7,10 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/ingredients/index.js',
-                'resources/js/recipes/index.js'
+                'resources/js/recipes/show.js',
+                'resources/js/recipes/history.js',
+                'resources/js/shops/form.js',
+                'resources/js/shops/map.js',
             ],
             refresh: true,
         }),

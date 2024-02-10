@@ -13,7 +13,7 @@ class RecipesTable extends Component
 {
     use WithPagination;
 
-    public $perPage = 5;
+    public $perPage = 10;
 
     #[Url(history: true)]
     public $search = '';

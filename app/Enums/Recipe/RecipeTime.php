@@ -4,9 +4,9 @@ namespace App\Enums\Recipe;
 
 class RecipeTime
 {
-    const QUICK = 'quick';
-    const MEDIUM = 'medium';
-    const LONG = 'long';
+    const QUICK = 'szybki';
+    const MEDIUM = 'średni';
+    const LONG = 'długi';
 
     const TYPES = [
         self::QUICK,

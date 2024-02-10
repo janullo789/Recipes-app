@@ -12,6 +12,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
@@ -74,6 +75,13 @@ class RecipeController extends Controller
             ->where('recipes_id', $recipe->id)
             ->join('ingredients', 'recipes_ingredients.ingredients_id', '=', 'ingredients.id')
             ->sum(DB::raw('ingredients.calories * recipes_ingredients.quantity'));
+
+//        $totalCalories = 0;
+//        foreach ($recipe->ingredients as $ingredient) {
+//            // Wykonujemy zapytanie do bazy danych dla każdego składnika w celu pobrania kalorii.
+//            $ingredientCalories = Ingredient::where('id', $ingredient->id)->first()->calories;
+//            $totalCalories += $ingredientCalories * $ingredient->pivot->quantity;
+//        }
 
         return view('recipes.show', [
             'recipe' => $recipe,

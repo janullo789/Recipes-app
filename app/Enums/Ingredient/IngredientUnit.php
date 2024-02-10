@@ -6,7 +6,7 @@ class IngredientUnit
 {
     const G = 'g';
     const ML = 'mL';
-    const PCS = 'pcs';
+    const PCS = 'szt.';
 
     const TYPES = [
         self::G,

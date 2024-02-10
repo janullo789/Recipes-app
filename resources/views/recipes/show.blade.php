@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-bold text-2xl text-indigo-700 leading-tight">
+        <h2 class="font-bold text-2xl leading-tight">
             {{ $recipe->name }}
         </h2>
     </x-slot>
@@ -18,7 +18,7 @@
                     <!-- Description -->
                     <div class="col-span-1">
                         <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
-                            <h3 class="text-2xl mb-2">{{ __('Description') }}</h3>
+                            <h3 class="text-2xl mb-2">{{ __('Opis') }}</h3>
                             <p>{{ $recipe->description }}</p>
                         </div>
 
@@ -36,7 +36,7 @@
                     <!-- Instruction -->
                     <div class="col-span-1">
                         <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
-                            <h3 class="text-2xl mb-2">{{ __('Ingredient') }}:</h3>
+                            <h3 class="text-2xl mb-2">{{ __('Składniki') }}</h3>
                             <ul>
                                 @foreach ($recipe->ingredients as $ingredient)
                                     <li>{{ $ingredient->name }} - {{ $ingredient->pivot->quantity }} [{{ $ingredient->unit }}]</li>
@@ -49,17 +49,17 @@
                     <div class="col-span-1 lg:col-span-2">
                         <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
                             @if (!empty($recipe->diet))
-                                <h3 class="text-2xl mb-2"><span class="font-bold">{{ __('Diet') }}:</span> {{ $recipe->diet }}</h3>
+                                <h3 class="text-2xl mb-2"><span class="font-bold">{{ __('Dieta') }}:</span> {{ $recipe->diet }}</h3>
                             @endif
-                            <h3 class="text-2xl mb-2"><span class="font-bold">{{ __('Meal preparation time') }}:</span> {{ $recipe->time }}</h3>
-                            <h3 class="text-2xl mb-2"><span class="font-bold">{{ __('Total calories') }}:</span> {{ $totalCalories }}</h3>
+                            <h3 class="text-2xl mb-2"><span class="font-bold">{{ __('Czas przygotowania') }}:</span> {{ $recipe->time }}</h3>
+                            <h3 class="text-2xl mb-2"><span class="font-bold">{{ __('Suma kalorii') }}:</span> {{ $totalCalories }}</h3>
                         </div>
                     </div>
 
                     <!-- Ingredients -->
                     <div class="col-span-1 lg:col-span-3">
                         <div class="bg-gray-100 p-4 rounded-lg shadow-lg whitespace-pre-line">
-                            <h3 class="text-2xl mb-2">{{ __('Instruction') }}</h3>
+                            <h3 class="text-2xl mb-2">{{ __('Instrukcja') }}</h3>
                             <p>{{ $recipe->instruction }}</p>
                         </div>
                     </div>

@@ -1,7 +1,6 @@
 import Swal from 'sweetalert2';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Pobierz dane z atrybutu danych
     const missingIngredientsElement = document.getElementById('missing-ingredients');
     const missingIngredientsData = missingIngredientsElement.getAttribute('data-ingredients');
     if (missingIngredientsData) {

@@ -23,7 +23,7 @@
                     <div class="my-4">
                         <x-input-label for="category" :value="__('Kategoria')"/>
                         <select id="category" name="category" class="bg-gray-50 shadow-sm border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                            <option value="" disabled selected>Select your option</option>
+                            <option value="" disabled selected>Wybierz wartość</option>
                             @foreach(\App\Enums\Ingredient\IngredientCategory::TYPES as $category)
                                 <option value="{{ $category }}">{{ $category }}</option>
                             @endforeach
@@ -35,7 +35,7 @@
                     <div class="my-4">
                         <x-input-label for="unit" :value="__('Jednostka')"/>
                         <select id="unit" name="unit" class="bg-gray-50 border my-1 border-gray-300 text-gray-900 rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                            <option value="" disabled selected>Select your option</option>
+                            <option value="" disabled selected>Wybierz wartość</option>
                             @foreach(\App\Enums\Ingredient\IngredientUnit::TYPES as $unit)
                                 <option value="{{ $unit }}">{{ $unit }}</option>
                             @endforeach

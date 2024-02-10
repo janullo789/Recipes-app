@@ -34,12 +34,19 @@ class RecipesHistory extends Component
     private function getCalorieDataForRecentWeeks(): array
     {
         $currentWeek = Carbon::now()->weekOfYear;
-        $year = date('Y');
+        $currentYear = date('Y');
         $caloriesPerWeek = [];
         $dateLabels = [];
 
         for ($week = $currentWeek; $week > $currentWeek - 10; $week--) {
-            $weekOfYear = $week > 0 ? $week : 52 + $week;
+            $weekOfYear = $week;
+            $year = $currentYear;
+
+            if ($weekOfYear <= 0) {
+                $weekOfYear = 52 + $week;
+                $year--;
+            }
+
             $startDate = Carbon::now()->setISODate($year, $weekOfYear)->startOfWeek();
             $endDate = Carbon::now()->setISODate($year, $weekOfYear)->endOfWeek();
 
@@ -53,7 +60,7 @@ class RecipesHistory extends Component
                     });
                 });
 
-            $caloriesPerWeek[$week] = $weeklyCalories;
+            $caloriesPerWeek[$weekOfYear] = $weeklyCalories;
             $dateLabels[$weekOfYear] = $startDate->format('d.m') . ' - ' . $endDate->format('d.m.Y');
         }
 
@@ -103,16 +110,21 @@ class RecipesHistory extends Component
     {
         $this->dispatch('chartUpdate');
 
-        $query = RecipeExecution::with('recipe')->orderBy($this->sortBy, $this->sortDir);
+        $query = RecipeExecution::where('user_id', auth()->id())
+            ->with('recipe')
+            ->orderBy($this->sortBy, $this->sortDir);
 
         if ($this->selectedWeek) {
             [$weekStart, $weekEnd] = explode(' - ', $this->selectedWeek);
-            [$dayStart, $monthStart] = explode('.', $weekStart);
-            [$dayEnd, $monthEnd, $year] = explode('.', $weekEnd);
+            [$dayStart, $monthStart, $yearStart] = explode('.', $weekStart);
+            [$dayEnd, $monthEnd, $yearEnd] = explode('.', $weekEnd);
 
-            $weekStart = "$year.$monthStart.$dayStart 00:00:00";
-            $weekEnd = "$year.$monthEnd.$dayEnd 23:59:59";
+            if ($monthStart > $monthEnd) {
+                $yearStart = $yearEnd - 1;
+            }
 
+            $weekStart = "$yearStart.$monthStart.$dayStart 00:00:00";
+            $weekEnd = "$yearEnd.$monthEnd.$dayEnd 23:59:59";
 
             $query->whereDate('created_at', '<=', $weekEnd)
                 ->whereDate('created_at', '>=', $weekStart);
@@ -123,4 +135,5 @@ class RecipesHistory extends Component
             'userRecipes' => $query->paginate($this->perPage)
         ]);
     }
+
 }

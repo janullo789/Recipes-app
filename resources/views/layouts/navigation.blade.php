@@ -75,7 +75,7 @@
                     <x-slot name="content">
                         @auth
                             <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
+                                {{ __('Profil') }}
                             </x-dropdown-link>
 
                             @can('isAdmin', auth()->user())
@@ -98,7 +98,7 @@
                                 <x-dropdown-link :href="route('logout')"
                                                  onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Wyloguj') }}
                                 </x-dropdown-link>
                             </form>
                         @endauth
@@ -168,7 +168,7 @@
 
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
+                        {{ __('Profil') }}
                     </x-responsive-nav-link>
 
                     @can('isAdmin', auth()->user())
@@ -192,7 +192,7 @@
                         <x-responsive-nav-link :href="route('logout')"
                                                onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                            {{ __('Wyloguj') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>

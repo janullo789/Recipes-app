@@ -7,6 +7,7 @@ use App\Models\Ingredient;
 use App\Models\UserIngredient;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 
 class FridgeController extends Controller
 {
@@ -15,8 +16,13 @@ class FridgeController extends Controller
      */
     public function index(): View
     {
-        $ingredients = Ingredient::all()->groupBy('category');
         $user_id = auth()->id();
+
+        $ingredients = Cache::remember("user_{$user_id}_ingredients",60, function () {
+            return Ingredient::all()->groupBy('category');
+        });
+        $ingredients = Ingredient::all()->groupBy('category');
+
         $user_ingredients = UserIngredient::where('user_id', $user_id)->get()->keyBy('ingredient_id');
 
         return view('fridge.index', compact('ingredients', 'user_ingredients'));
